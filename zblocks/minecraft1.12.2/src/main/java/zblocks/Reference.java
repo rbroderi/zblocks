@@ -1,5 +1,5 @@
 package zblocks;
-//update
+
 public class Reference {
 	public static final String MODID = "zblock";
 	public static final String MODNAME = "Zelda Style Pushable Puzzle Blocks";
