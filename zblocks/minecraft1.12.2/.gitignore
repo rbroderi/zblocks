@@ -28,7 +28,7 @@ exclude
 logs
 libs
 README.txt
-LICENSE-*
+LICENSE-Paul*
 LICENSE.txt
 CREDITS.txt
 forge-1.12.2-*.txt
