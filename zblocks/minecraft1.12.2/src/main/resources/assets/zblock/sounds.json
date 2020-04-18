@@ -1,0 +1,12 @@
+{
+  "thud": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.thud",
+    "sounds": [ "zblock:thud" ]
+  },
+    "scrape": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.scrape",
+    "sounds": [ "zblock:scrape" ]
+  }
+}

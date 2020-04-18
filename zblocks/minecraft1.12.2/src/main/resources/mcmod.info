@@ -1,0 +1,16 @@
+[
+{
+  "modid": "zblock",
+  "name": "Pushable Puzzle Blocks",
+  "description": "Pushable Puzzle Blocks",
+  "version": "1.0",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["slugg0"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

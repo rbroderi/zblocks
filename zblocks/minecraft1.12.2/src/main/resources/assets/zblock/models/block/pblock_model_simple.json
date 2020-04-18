@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "down": "zblock:blocks/pblock128",
+        "up": "zblock:blocks/pblock128",
+        "north": "zblock:blocks/pblock128",
+        "east": "zblock:blocks/pblock128",
+        "south": "zblock:blocks/pblock128",
+        "west": "zblock:blocks/pblock128",
+        "particle": "blocks/lapis_block"
+    }
+}
