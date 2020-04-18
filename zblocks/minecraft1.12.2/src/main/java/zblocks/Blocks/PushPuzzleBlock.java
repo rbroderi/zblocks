@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -26,9 +27,42 @@ public class PushPuzzleBlock extends BlockFalling {
 		return true;
 	}
 	@Override
-    public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public int getStrongPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
        return 15;
 	}
+	
+	@Override
+	public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return 15;
+ 	}
+	@Override
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		return true;
+	}
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+		super.onBlockAdded(world, pos, state);
+		for (EnumFacing enumfacing : EnumFacing.VALUES) {
+		world.notifyNeighborsOfStateChange(pos.offset(enumfacing),this,true);
+		}
+	}
+	
+	@Override
+	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+		super.onBlockDestroyedByPlayer(world, pos, state);
+		for (EnumFacing enumfacing : EnumFacing.VALUES) {
+		world.notifyNeighborsOfStateChange(pos.offset(enumfacing),this,true);
+		}
+	}
+	
+	@Override
+	public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion ex) {
+		super.onBlockDestroyedByExplosion(world, pos, ex);
+		for (EnumFacing enumfacing : EnumFacing.VALUES) {
+		world.notifyNeighborsOfStateChange(pos.offset(enumfacing),this,true);
+		}
+	}
+	
 	@Override
 	public void onEndFalling(World world,BlockPos pos,IBlockState s1,IBlockState s2) {
 		super.onEndFalling(world,pos,s1,s2);
