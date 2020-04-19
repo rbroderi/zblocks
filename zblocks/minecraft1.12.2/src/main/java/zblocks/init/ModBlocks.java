@@ -42,7 +42,7 @@ public class ModBlocks {
 	@SubscribeEvent
 	public static void registerSounds(RegistryEvent.Register<SoundEvent> event){
 		final SoundEvent[] soundEvents = {
-				new SoundEvent(new ResourceLocation(Reference.MODID, "thud")).setRegistryName("thud"),
+				new SoundEvent(new ResourceLocation(Reference.MODID, "thud_delay")).setRegistryName("thud_delay"),
 				new SoundEvent(new ResourceLocation(Reference.MODID, "scrape")).setRegistryName("scrape")
 			};
 			event.getRegistry().registerAll(soundEvents);

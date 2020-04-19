@@ -69,7 +69,7 @@ public class PushPuzzleBlock extends BlockFalling {
 		
 		if(!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 		{
-		ResourceLocation location = new ResourceLocation("zblock", "thud");
+		ResourceLocation location = new ResourceLocation("zblock", "thud_delay");
 		//SoundEvent event = new SoundEvent(location);
 		world.playSound(null,pos.getX(),pos.getY(),pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS, 1f, 1f);
 		}
