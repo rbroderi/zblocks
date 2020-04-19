@@ -2,7 +2,8 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
         "pblock_blank16": "zblock:blocks/pblock_blank16",
-        "pblock128b_gold": "zblock:blocks/pblock128b_gold"
+        "depress_block_top": "zblock:blocks/depress_block_top",
+        "sandstone" : "blocks/sandstone_normal"
     },
     "display": {
         "gui": {
@@ -40,20 +41,21 @@
         {
             "name": "bottom",
             "from": [ 0, 0, 0 ], 
-            "to": [ 16, 15, 16 ], 
+            "to": [ 16, 15, 16 ],            
             "faces": {
-                "north": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 15 ] },
-                "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 15 ] },
-                "south": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 15 ] },
-                "west": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 15 ] },
-                "up": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 16 ] },
-                "down": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 16 ] }
+                "north": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
+                "east": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
+                "south": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
+                "west": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
+                "up": { "texture": "#sandstone", "uv": [ 0, 0, 16, 16 ] },
+                "down": { "texture": "#sandstone", "uv": [ 0, 0, 16, 16 ] }
             }
         },
         {
             "name": "n_rim",
             "from": [ 0, 15, 0 ], 
-            "to": [ 16, 16, 1 ], 
+            "to": [ 16, 16, 1 ],
+            "shade": false,
             "faces": {
                 "north": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 1 ] },
                 "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 1, 1 ] },
@@ -65,7 +67,8 @@
         {
             "name": "s_rim",
             "from": [ 0, 15, 15 ], 
-            "to": [ 16, 16, 16 ], 
+            "to": [ 16, 16, 16 ],
+            "shade": false,
             "faces": {
                 "north": { "texture": "#pblock_blank16", "uv": [ 0, 0, 16, 1 ] },
                 "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 1, 1 ] },
@@ -77,7 +80,8 @@
         {
             "name": "e_rim",
             "from": [ 15, 15, 1 ], 
-            "to": [ 16, 16, 15 ], 
+            "to": [ 16, 16, 15 ],
+            "shade": false,
             "faces": {
                 "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 14, 1 ] },
                 "west": { "texture": "#pblock_blank16", "uv": [ 0, 0, 14, 1 ] },
@@ -87,7 +91,8 @@
         {
             "name": "w_rim",
             "from": [ 0, 15, 1 ], 
-            "to": [ 1, 16, 15 ], 
+            "to": [ 1, 16, 15 ],
+            "shade": false,
             "faces": {
                 "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 14, 1 ] },
                 "west": { "texture": "#pblock_blank16", "uv": [ 0, 0, 14, 1 ] },
@@ -97,13 +102,13 @@
         {
             "name": "center",
             "from": [ 2, 15, 2 ], 
-            "to": [ 14, 16, 14 ], 
+            "to": [ 14, 16, 14 ],
             "faces": {
                 "north": { "texture": "#pblock_blank16", "uv": [ 0, 0, 12, 1 ] },
                 "east": { "texture": "#pblock_blank16", "uv": [ 0, 0, 12, 1 ] },
                 "south": { "texture": "#pblock_blank16", "uv": [ 0, 0, 12, 1 ] },
                 "west": { "texture": "#pblock_blank16", "uv": [ 0, 0, 12, 1 ] },
-                "up": { "texture": "#pblock128b_gold", "uv": [ 0, 0, 12, 12 ] }
+                "up": { "texture": "#depress_block_top", "uv": [ 2, 2, 14, 14 ] }
             }
         }
     ]

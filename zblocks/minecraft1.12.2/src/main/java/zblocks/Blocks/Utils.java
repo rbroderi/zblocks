@@ -18,7 +18,8 @@ public class Utils {
 			double deltaX = Math.floor(entity.posX - pos.getX());
 			int deltaY = (int) Math.floor(entity.posY - pos.getY());
 			double deltaZ = Math.floor(entity.posZ - pos.getZ());
-			return deltaY==0 && ((deltaZ==0 && Math.abs(deltaX) <1.7 ) || (deltaX==0 && Math.abs(deltaZ) <1.7));
+			//checks if player is not falling or jumping, is on same y level as block and is around 1 block away from BlockPos
+			return Math.abs(entity.motionY)<.1 && deltaY==0 && ((deltaZ==0 && Math.abs(deltaX) <1.7 ) || (deltaX==0 && Math.abs(deltaZ) <1.7));
 		}
 	   
 		private static void spawnParticle(World world, EnumParticleTypes type, double x, double y, double z)

@@ -81,9 +81,13 @@ public class PushPuzzleBlock extends BlockFalling {
 		   if(moveBlockTo(player.world, player, pos, pos.offset(player.getHorizontalFacing()))) { //.worldObj
 			if(!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 			{
-			ResourceLocation location = new ResourceLocation("zblock", "scrape");
+				//don't play scrape if block will fall
+				if(!world.isAirBlock( (pos.offset(player.getHorizontalFacing()).offset(EnumFacing.DOWN) )))
+				{
+				ResourceLocation location = new ResourceLocation("zblock", "scrape");
 			//SoundEvent event = new SoundEvent(location);
 			world.playSound(null,pos.getX(),pos.getY(),pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS, 1f, 1f);
+				}
 			}
 	    }
 	    }
@@ -92,8 +96,8 @@ public class PushPuzzleBlock extends BlockFalling {
 		{
 			boolean ret=false;
 			IBlockState hit = world.getBlockState(pos);
-
-			if(hit.getBlock()==this && Utils.isNextTo(player,pos) && world.isAirBlock(new BlockPos(pos.getX(),pos.getY()+1,pos.getZ())) && world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) 
+			//player has hit block, is next to this block, the block does not have anything on top of it, and has a space to slide into
+			if(hit.getBlock()==this && Utils.isNextTo(player,pos) && world.isAirBlock(pos.offset(EnumFacing.UP)) && world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) 
 			{
 				if(!world.isRemote) 
 				{ 
