@@ -1,14 +1,30 @@
 {
-    "defaults": {
-        "textures": {
-            "particle": "blocks/sandstone"
-        },
-        "model": "minecraft:sandstone",
-        "uvlock": false
-    },
-    "variants": {
-        "normal": [
-            { "model": "zblock:push_block_model" }
-        ]
-    }
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"pblock128b": "zblock:blocks/pblock128b"
+		},
+		"model": "zblock:push_block_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:push_block_model",
+			"textures": {
+				"center": "zblock:blocks/pblock128b"
+			}
+		},
+		"activated": {
+			"true": {
+				"textures": {
+					"center": "zblock:blocks/pblock128b_activated_anim"
+				}
+			},
+			"false": {
+				"textures": {
+					"center": "zblock:blocks/pblock128b"
+				}
+			}
+		}
+	}
 }
