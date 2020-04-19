@@ -8,7 +8,7 @@
     },
     "variants": {
         "normal": [
-            { "model": "zblock:pblock_model" }
+            { "model": "zblock:push_block_model" }
         ]
     }
 }

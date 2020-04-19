@@ -1,1 +1,2 @@
-tile.pblock.name=Puzzle Block
+tile.push_block.name=Push Puzzle Block
+tile.depress_block.name=Depressible Puzzle Block

@@ -1,0 +1,14 @@
+{
+    "defaults": {
+        "textures": {
+            "particle": "blocks/sandstone"
+        },
+        "model": "minecraft:sandstone",
+        "uvlock": false
+    },
+    "variants": {
+        "normal": [
+            { "model": "zblock:depress_block_model" }
+        ]
+    }
+}

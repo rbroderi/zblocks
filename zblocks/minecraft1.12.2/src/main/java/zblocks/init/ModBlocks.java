@@ -1,5 +1,9 @@
 package zblocks.init;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,29 +18,37 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import zblocks.Reference;
+import zblocks.Blocks.DepressPuzzleBlock;
 import zblocks.Blocks.PushPuzzleBlock;
 
 @Mod.EventBusSubscriber(modid=Reference.MODID)
 public class ModBlocks {
 
-	static Block PushPuzzleBlock;
+	static List<Block> blockList = new ArrayList<Block>();
+	static List<Item> itemList = new ArrayList<Item>();
 	
 	public static void init() {
-		  PushPuzzleBlock = new PushPuzzleBlock("pblock", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f);
+		blockList.add(new PushPuzzleBlock("push_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
+		blockList.add(new DepressPuzzleBlock("depress_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
 	}	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		  event.getRegistry().registerAll(PushPuzzleBlock);
+		  event.getRegistry().registerAll(blockList.toArray(new Block[0]));
 	}
 	
 	@SubscribeEvent
-	public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
-     event.getRegistry().registerAll(new ItemBlock(PushPuzzleBlock).setRegistryName(PushPuzzleBlock.getRegistryName()));
+	public static void registerItemBlocks(RegistryEvent.Register<Item> event) { 
+		for(Block block: blockList) {
+			itemList.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+		}
+     event.getRegistry().registerAll(itemList.toArray(new Item[0]));
 	}
 	
 	@SubscribeEvent
 	public static void registerRenders(ModelRegistryEvent event) {
-		 registerRender(Item.getItemFromBlock(PushPuzzleBlock));
+		for(Item item: itemList) {
+			 registerRender(item);
+		}
 	}
 	
 	@SubscribeEvent
