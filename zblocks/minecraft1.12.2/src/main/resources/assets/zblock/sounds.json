@@ -1,8 +1,8 @@
 {
   "thud": {
     "category": "block",
-    "subtitle": "zblock.subtitle.thud",
-    "sounds": [ "zblock:thud" ]
+    "subtitle": "zblock.subtitle.thud_delay",
+    "sounds": [ "zblock:thud_delay" ]
   },
     "scrape": {
     "category": "block",
