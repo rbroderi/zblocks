@@ -6,6 +6,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class Utils {
+	public static boolean isOdd(int i) {
+	     return (i & 1) != 0;
+	}
+	public static boolean isEven(int i) {
+	     return !isOdd(i);
+	}
 	   public static double getDistanceToEntity(EntityPlayer entity, BlockPos pos) {
 			double deltaX = entity.posX - pos.getX();
 			double deltaY = entity.posY - pos.getY();
@@ -15,7 +21,7 @@ public class Utils {
 	   }
 	   
 	   public static boolean isNextTo(EntityPlayer player, BlockPos pos) {
-		   return Math.abs(player.motionY)<.1 && player.getDistanceSqToCenter(pos)<=1.3;
+		   return Math.abs(player.motionY)<.1 && player.getDistanceSqToCenter(pos)<=0.94;
 	   }
 	   
 		private static void spawnParticle(World world, EnumParticleTypes type, double x, double y, double z)

@@ -3,7 +3,9 @@
     "textures": {
         "pblock_blank16": "zblock:blocks/pblock_blank16",
         "depress_block_top": "zblock:blocks/depress_block_top",
-        "sandstone" : "blocks/sandstone_normal"
+        "sandstone" : "blocks/sandstone_normal",
+        "pblock128b": "zblock:blocks/pblock128b",
+        "particle": "blocks/sandstone_normal"
     },
     "display": {
         "gui": {
@@ -47,7 +49,7 @@
                 "east": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
                 "south": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
                 "west": { "texture": "#sandstone", "uv": [ 0, 0, 16, 15 ] },
-                "up": { "texture": "#sandstone", "uv": [ 0, 0, 16, 16 ] },
+                "up": { "texture": "#pblock128b", "uv": [ 0, 0, 16, 16 ] },
                 "down": { "texture": "#sandstone", "uv": [ 0, 0, 16, 16 ] }
             }
         },

@@ -1,14 +1,18 @@
 {
-    "defaults": {
-        "textures": {
-            "particle": "blocks/sandstone_normal"
-        },
-        "model": "blocks/sandstone_normal",
-        "uvlock": false
-    },
-    "variants": {
-        "normal": [
-            { "model": "zblock:depress_block_model" }
-        ]
-    }
+	"forge_marker": 1,
+	"defaults": {
+		"model": "zblock:depress_block_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:depress_block_model"
+			},
+		"activated": {
+			"true": {
+			},
+			"false": {
+			}
+		}
+	}
 }

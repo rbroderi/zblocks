@@ -2,7 +2,7 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"pblock128b": "zblock:blocks/pblock128b"
+			"pblock128b": "zblock:blocks/pblock128b_yellow"
 		},
 		"model": "zblock:push_block_model",
 		"uvlock": false
