@@ -1,2 +1,14 @@
 tile.push_block.name=Push Puzzle Block
 tile.depress_block.name=Depressible Puzzle Block
+tile.push_block_red.name=Red Push Puzzle Block
+tile.depress_block_red.name=Red Depressible Puzzle Block
+tile.push_block_blue.name=Blue Push Puzzle Block
+tile.depress_block_blue.name=Blue Depressible Puzzle Block
+tile.push_block_green.name=Green Push Puzzle Block
+tile.depress_block_green.name=Green Depressible Puzzle Block
+tile.push_block_cyan.name=Cyan Push Puzzle Block
+tile.depress_block_cyan.name=Cyan Depressible Puzzle Block
+tile.push_block_magenta.name=Magenta Push Puzzle Block
+tile.depress_block_magenta.name=Magenta Depressible Puzzle Block
+tile.push_block_yellow.name=Yellow Push Puzzle Block
+tile.depress_block_yellow.name=Yellow Depressible Puzzle Block

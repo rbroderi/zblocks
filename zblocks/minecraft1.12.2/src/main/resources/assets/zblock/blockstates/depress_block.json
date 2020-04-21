@@ -1,6 +1,10 @@
 {
 	"forge_marker": 1,
 	"defaults": {
+		"textures": {
+			"pblock128b": "zblock:blocks/pblock128b",
+               "pblock_blank16": "zblock:blocks/pblock_blank16"
+		},
 		"model": "zblock:depress_block_model",
 		"uvlock": false
 	},
@@ -9,10 +13,8 @@
 			"model": "zblock:depress_block_model"
 			},
 		"activated": {
-			"true": {
-			},
-			"false": {
-			}
+			"true": {},
+			"false": {}
 		}
 	}
 }

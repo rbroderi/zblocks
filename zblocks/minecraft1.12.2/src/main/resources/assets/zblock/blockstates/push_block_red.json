@@ -1,8 +1,9 @@
-﻿{
+{
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"pblock128b": "zblock:blocks/pblock128b_red"
+			"pblock128b": "zblock:blocks/pblock128b_red",
+               "pblock_blank16": "zblock:blocks/pblock_blank16_red"
 		},
 		"model": "zblock:push_block_model",
 		"uvlock": false

@@ -1,10 +1,8 @@
 {
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
-        "pblock_blank16": "zblock:blocks/pblock_blank16",
         "depress_block_top": "zblock:blocks/depress_block_top",
         "sandstone" : "blocks/sandstone_normal",
-        "pblock128b": "zblock:blocks/pblock128b",
         "particle": "blocks/sandstone_normal"
     },
     "display": {

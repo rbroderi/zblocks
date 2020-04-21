@@ -17,9 +17,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import zblocks.Reference;
+import zblocks.Blocks.Colored.ColorEnum;
 import zblocks.Blocks.DepressPuzzleBlock;
 import zblocks.Blocks.PushPuzzleBlock;
-import zblocks.Blocks.PushPuzzleBlock.ColorEnum;
 
 @Mod.EventBusSubscriber(modid=Reference.MODID)
 public class ModBlocks {
@@ -28,11 +28,14 @@ public class ModBlocks {
 	static List<Item> itemList = new ArrayList<Item>();
 	
 	public static void init() {
+		//two loops to keep blocks grouped
 		for(ColorEnum c: ColorEnum.values()) {
-		blockList.add(new PushPuzzleBlock("push_block"+(c!=ColorEnum.BASE?"_"+c.getName():""), Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
+		blockList.add(new PushPuzzleBlock("push_block", Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
+		}
+		for(ColorEnum c: ColorEnum.values()) {
+		blockList.add(new DepressPuzzleBlock("depress_block", Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
 		}
 		//blockList.add(new PushPuzzleBlock("push_block_blue", Material.ROCK,ColorEnum.BLUE).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
-		blockList.add(new DepressPuzzleBlock("depress_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
 	}	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
