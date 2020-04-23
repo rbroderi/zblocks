@@ -1,5 +1,8 @@
 package zblocks.Blocks;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -21,6 +24,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import zblocks.SlidingEventData;
+import zblocks.Utils;
+import zblocks.Blocks.Interfaces.Colored;
+import zblocks.Blocks.Interfaces.Matchable;
+import zblocks.Blocks.Interfaces.Resettable;
+import zblocks.TileEntities.ResetDataTileEntity;
 
 public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable, Resettable {
 
@@ -28,6 +39,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	public static final int iACTIVATED = 1, iDISABLED = 0;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
+	private static Queue<SlidingEventData> slidingEventData = new LinkedList<SlidingEventData>();
 
 	// this needs to be stored in tileentity private BlockPos startPos;
 	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
@@ -39,6 +51,10 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		this.color = color;
 	}
 
+	public PushPuzzleBlock() {
+		
+	}
+	
 	// ******************************** Public Overrides ****************************************************/
 
 	@Override
@@ -46,7 +62,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		return true;
 	}
 
-	public ResetDataTileEntity getTileEntity(IBlockAccess world, BlockPos pos) {
+	public static ResetDataTileEntity getTileEntity(IBlockAccess world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof ResetDataTileEntity) {
 			return (ResetDataTileEntity) tile;
@@ -185,15 +201,56 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			if (!world.isRemote) {
 				// world.destroyBlock(pos, false);
 				BlockPos startPos = getTileEntity(world, pos).getStartPos();
-				world.setBlockState(pos, Blocks.AIR.getDefaultState()); // suppress destroy sound?
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				world.setBlockState(posMoveToHere, hit);// pushes the block
 				getTileEntity(world, posMoveToHere).setStartPos(startPos);
-				setActivated(world, posMoveToHere);
+
+				// causes block to slide across ice, TODO implement sliding block state (ice on bottom of block?) as well as noise when it comes to stop
+				EnumFacing facing = player.getHorizontalFacing();
+				if (world.getBlockState(posMoveToHere.down()).getBlock() == Blocks.ICE &&
+						world.getBlockState(posMoveToHere.offset(facing).down()).getBlock() == Blocks.ICE &&
+						world.isAirBlock(posMoveToHere.offset(facing))) {
+				slidingEventData.offer(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing()));
+				}
 			}
+			setActivated(world, posMoveToHere);
 			ret = true;
 		}
 		return ret;
 	}
+
+	@SubscribeEvent
+	public static void onServerTick(TickEvent.ServerTickEvent event) {
+		System.out.println("tikcing");
+		if (event.phase == TickEvent.Phase.START) {
+			Queue<SlidingEventData> stillSliding = new LinkedList<SlidingEventData>();
+			while (!slidingEventData.isEmpty()) {
+				System.out.println("sliding");
+				SlidingEventData slideEvent = slidingEventData.poll();
+				World world = slideEvent.world;
+				BlockPos from = slideEvent.from;
+				EnumFacing facing = slideEvent.facing;
+				BlockPos to = from.offset(facing);
+				if (world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
+						world.getBlockState(from.offset(facing).down()).getBlock() == Blocks.ICE &&
+						world.isAirBlock(to)) {
+					Utils.spawnParticle(world, EnumParticleTypes.CLOUD, from);
+					BlockPos startPos = getTileEntity(world, from).getStartPos();
+					IBlockState fromState = world.getBlockState(from);
+					world.setBlockState(from, Blocks.AIR.getDefaultState());
+					world.setBlockState(to, fromState);// pushes the block
+					getTileEntity(world, to).setStartPos(startPos);
+					from = to;
+				}
+				if (world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
+						world.getBlockState(from.offset(facing).down()).getBlock() == Blocks.ICE) {
+					stillSliding.offer(slideEvent);
+				}
+			}
+			slidingEventData = stillSliding;
+		}
+	}
+
 
 	@Override
 	public ColorEnum getColor() {

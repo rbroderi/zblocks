@@ -10,6 +10,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import zblocks.Blocks.Interfaces.Colored;
+import zblocks.Blocks.Interfaces.Matchable;
 
 public class DepressPuzzleBlock extends Block implements Colored,Matchable{
 	//private boolean isActivated = false;

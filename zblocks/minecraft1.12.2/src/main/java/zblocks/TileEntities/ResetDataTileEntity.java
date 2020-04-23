@@ -1,4 +1,4 @@
-package zblocks.Blocks;
+package zblocks.TileEntities;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;

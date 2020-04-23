@@ -1,4 +1,4 @@
-package zblocks.Blocks;
+package zblocks.Blocks.Interfaces;
 
 public interface Matchable {
 

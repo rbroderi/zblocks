@@ -1,4 +1,4 @@
-package zblocks.Blocks;
+package zblocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;

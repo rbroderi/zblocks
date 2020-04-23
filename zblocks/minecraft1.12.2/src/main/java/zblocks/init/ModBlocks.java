@@ -18,11 +18,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import zblocks.Reference;
-import zblocks.Blocks.Colored.ColorEnum;
 import zblocks.Blocks.DepressPuzzleBlock;
 import zblocks.Blocks.Hourglass;
 import zblocks.Blocks.PushPuzzleBlock;
-import zblocks.Blocks.ResetDataTileEntity;
+import zblocks.Blocks.Interfaces.Colored.ColorEnum;
+import zblocks.TileEntities.ResetDataTileEntity;
 
 @Mod.EventBusSubscriber(modid=Reference.MODID)
 public class ModBlocks {
