@@ -12,3 +12,4 @@ tile.push_block_magenta.name=Magenta Push Puzzle Block
 tile.depress_block_magenta.name=Magenta Depressible Puzzle Block
 tile.push_block_yellow.name=Yellow Push Puzzle Block
 tile.depress_block_yellow.name=Yellow Depressible Puzzle Block
+tile.hourglass.name=Hourglass

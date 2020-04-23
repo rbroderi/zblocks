@@ -1,0 +1,16 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "zblock:hourglass_trans_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:hourglass_trans_model"
+			},
+		"activated": {
+			"true": {},
+			"false": {}
+		}
+	}
+}

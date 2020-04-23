@@ -10,13 +10,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import zblocks.Blocks.Colored.ColorEnum;
 
-public class DepressPuzzleBlock extends Block implements Colored{
-	private boolean isActivated = false;
+public class DepressPuzzleBlock extends Block implements Colored,Matchable{
+	//private boolean isActivated = false;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
 	private ColorEnum color;
+	private Class<PushPuzzleBlock> matchType = PushPuzzleBlock.class;
 
 	public DepressPuzzleBlock(String name, Material material, ColorEnum color) {
 		super(material);
@@ -26,7 +26,7 @@ public class DepressPuzzleBlock extends Block implements Colored{
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
 		this.color = color;
 	}
-
+	
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -34,7 +34,7 @@ public class DepressPuzzleBlock extends Block implements Colored{
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
+		if (state.equals(this.blockState.getBaseState().withProperty(activated, true))) {
 			return iACTIVATED;
 		} else {
 			return iDISABLED;
@@ -58,7 +58,7 @@ public class DepressPuzzleBlock extends Block implements Colored{
 	@SuppressWarnings("deprecation")
 	@Override
 	public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		if (isActivated) {
+		if (state==this.getDefaultState().withProperty(activated, true)) {
 			return 15;
 		}
 		return super.getWeakPower(state, blockAccess, pos, side);
@@ -73,26 +73,13 @@ public class DepressPuzzleBlock extends Block implements Colored{
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos neighbor) {
 		super.neighborChanged(state, world, pos, block, neighbor);
-		// world.getBlockState(neighbor).getBlock()
-		// if(pos.up().getX() == neighbor.getX() && pos.up().getY() == neighbor.getY()&
-		// & pos.up().getZ() == neighbor.getZ() && block instanceof PushPuzzleBlock) {
-		
-		if(pos.up() != neighbor)
-		{
-			// neighbor isn't above me no further checks needed
-			return;
-		}
-		
-		if (block instanceof PushPuzzleBlock) {
-			if (this.compareColors(ColorEnum.BASE) || // uncolored depress block activate with any color push block
-					((Colored) block).compareColors(ColorEnum.BASE) || // colored bases activated with uncolored push blocks
-					((Colored) block).compareColors(this)) { // colored base activates with matching color push block
-				//System.out.println("my color: " + this.color + " neighbor color:" + ((PushPuzzleBlock) block).color);
-				isActivated = true;
+
+		if(pos.up() == neighbor  && block instanceof Matchable) {
+			if(this.matches((Matchable) block)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-			} else {
-				if (isActivated == true) {
-					isActivated = false;
+			}
+			else {
+				if (state.equals(this.getDefaultState().withProperty(activated, true))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 					for (EnumFacing enumfacing : EnumFacing.VALUES) {
 						world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
@@ -102,14 +89,31 @@ public class DepressPuzzleBlock extends Block implements Colored{
 		}
 	}
 	
+	//For correct lighting around the block
 	@Override
-	public boolean compareColors(Colored other) {
-		return compareColors(other.getColor());
+	public boolean isFullCube(IBlockState state) {
+	return false;
 	}
 	
 	@Override
-	public boolean compareColors(ColorEnum other) {
-		return this.color == other;
+	public boolean matches(Matchable other) {
+		if(!this.getClass().equals(other.getMatchType())) {
+			return false;
+		}
+		if (!(other.getTrait() instanceof ColorEnum)) {
+			return false;
+		}
+		return ((ColorEnum)this.getTrait()).compare(((ColorEnum)other.getTrait()));
+	}
+
+	@Override
+	public Object getTrait() {
+		return this.color;
+	}
+
+	@Override
+	public Class<?> getMatchType() {
+		return this.matchType;
 	}
 
 	@Override

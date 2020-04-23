@@ -8,5 +8,10 @@
     "category": "block",
     "subtitle": "zblock.subtitle.scrape",
     "sounds": [ "zblock:scrape" ]
+  },
+    "warp": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.warp",
+    "sounds": [ "zblock:warp" ]
   }
 }

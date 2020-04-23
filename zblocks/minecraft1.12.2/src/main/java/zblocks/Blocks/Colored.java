@@ -15,6 +15,10 @@ public interface Colored {
 		public int getValue() {
 			return value;
 		}
+		
+		public boolean compare(ColorEnum other) {
+			return this==BASE || other == BASE || this == other;
+		}
 
 		@Override
 		// Property names (in your case probably returned by IStringSerializable::getName) must be all lowercase, in fact they must match
@@ -23,7 +27,5 @@ public interface Colored {
 			return this.name().toLowerCase();
 		}
 	}
-	public boolean compareColors(Colored other);
-	public boolean compareColors(ColorEnum other);
 	public ColorEnum getColor();
 }

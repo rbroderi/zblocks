@@ -1,5 +1,7 @@
 package zblocks.Blocks;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
@@ -9,9 +11,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -19,25 +21,46 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import zblocks.Blocks.Colored.ColorEnum;
 
-public class PushPuzzleBlock extends BlockFalling implements Colored{
+public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable, Resettable {
 
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
 	private ColorEnum color;
-	public PushPuzzleBlock(String name, Material material,ColorEnum color) {
+	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
+
+	// this needs to be stored in tileentity private BlockPos startPos;
+	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
 		super(material);
-		setUnlocalizedName(color==ColorEnum.BASE?name:name+"_"+color.getName());
-		setRegistryName(color==ColorEnum.BASE?name:name+"_"+color.getName());
+		setUnlocalizedName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
+		setRegistryName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
 		this.useNeighborBrightness = true; // workaround for lighting issue - culling face not working with insets
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
-		this.color=color;
+		this.color = color;
 	}
 
-	//******************************** Public Overrides ****************************************************/
-	
-	
+	// ******************************** Public Overrides ****************************************************/
+
+	@Override
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
+
+	public ResetDataTileEntity getTileEntity(IBlockAccess world, BlockPos pos) {
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile instanceof ResetDataTileEntity) {
+			return (ResetDataTileEntity) tile;
+		}
+		System.err.println("Warning invalid tile entity returned\nExpected ResetDataTileEnity got:" + tile.getClass());
+		return null;
+	}
+
+	@Nullable
+	@Override
+	public ResetDataTileEntity createTileEntity(World world, IBlockState state) {
+		return new ResetDataTileEntity();
+	}
+
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -45,20 +68,18 @@ public class PushPuzzleBlock extends BlockFalling implements Colored{
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if(state==this.blockState.getBaseState().withProperty(activated, true)) {
+		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
 			return iACTIVATED;
-		}
-		else {
+		} else {
 			return iDISABLED;
 		}
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int i) {
-		if(i==iACTIVATED) {
+		if (i == iACTIVATED) {
 			return this.blockState.getBaseState().withProperty(activated, true);
-		}
-		else {
+		} else {
 			return this.blockState.getBaseState().withProperty(activated, false);
 		}
 	}
@@ -95,6 +116,12 @@ public class PushPuzzleBlock extends BlockFalling implements Colored{
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
 		setActivated(world, pos);
+		ResetDataTileEntity tile = getTileEntity(world, pos);
+		// first time we have placed block
+		if (tile.getStartPos() == null) {
+			tile.setStartPos(pos);
+		}
+		// this.startPos = pos;
 		for (EnumFacing enumfacing : EnumFacing.VALUES) {
 			world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
 		}
@@ -140,14 +167,14 @@ public class PushPuzzleBlock extends BlockFalling implements Colored{
 				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).offset(EnumFacing.DOWN)))) {
 					ResourceLocation location = new ResourceLocation("zblock", "scrape");
 					// SoundEvent event = new SoundEvent(location);
-					world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location),
-							SoundCategory.BLOCKS, 1f, 1f);
+					world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS,
+							1f, 1f);
 				}
 			}
 		}
 	}
-	
-	//******************************** Public ****************************************************/
+
+	// ******************************** Public ****************************************************/
 
 	public boolean moveBlockTo(World world, EntityPlayer player, BlockPos pos, BlockPos posMoveToHere) {
 		boolean ret = false;
@@ -156,47 +183,79 @@ public class PushPuzzleBlock extends BlockFalling implements Colored{
 		if (hit.getBlock().equals(this) && Utils.isNextTo(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
 				&& world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) {
 			if (!world.isRemote) {
-				//world.destroyBlock(pos, false);
+				// world.destroyBlock(pos, false);
+				BlockPos startPos = getTileEntity(world, pos).getStartPos();
 				world.setBlockState(pos, Blocks.AIR.getDefaultState()); // suppress destroy sound?
 				world.setBlockState(posMoveToHere, hit);// pushes the block
+				getTileEntity(world, posMoveToHere).setStartPos(startPos);
 				setActivated(world, posMoveToHere);
 			}
 			ret = true;
 		}
 		return ret;
 	}
-	
-	@Override
-	public boolean compareColors(Colored other) {
-		return compareColors(other.getColor());
-	}
-	
-	@Override
-	public boolean compareColors(ColorEnum other) {
-		return this.color == other;
-	}	
 
 	@Override
 	public ColorEnum getColor() {
 		return this.color;
 	}
-		
-	
+
+	// For correct lighting around the block
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
 //************************************* Private **************************************************************************
 
 	private void setActivated(World world, BlockPos pos) {
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
-		if (downBlock instanceof DepressPuzzleBlock) {
-			if (this.compareColors(ColorEnum.BASE) || // uncolored depress block activate with any color push block
-					((Colored) downBlock).compareColors(ColorEnum.BASE) || // colored bases activated with uncolored push blocks
-					((Colored) downBlock).compareColors(this)) { // colored base activates with matching color push block
+
+		if (downBlock instanceof Matchable) {
+			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
 				Utils.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
-				}
 			}
-	}	
+		}
+
+	}
+
+	@Override
+	public boolean matches(Matchable other) {
+		if (!this.getClass().equals(other.getMatchType())) {
+			return false;
+		}
+		if (!(other.getTrait() instanceof ColorEnum)) {
+			return false;
+		}
+		return ((ColorEnum) this.getTrait()).compare(((ColorEnum) other.getTrait()));
+	}
+
+	@Override
+	public Object getTrait() {
+		return this.color;
+	}
+
+	@Override
+	public Class<?> getMatchType() {
+		return this.matchType;
+	}
+
+	@Override
+	public void resetPosition(World world, BlockPos pos) {
+		if (!world.isRemote) {
+			ResetDataTileEntity tile = getTileEntity(world, pos);
+			BlockPos startPos = tile.getStartPos();
+			if (startPos != null) { // perhaps set startPos to 0,0,0 as default?
+				// System.out.println("x: " + pos.getX() + "," + "y: " + pos.getY() + "," + "z: " + pos.getZ());
+				// System.out.println("x: " + startPos.getX() + "," + "y: " + startPos.getY() + "," + "z: " + startPos.getZ());
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
+				world.setBlockState(startPos, this.getDefaultState());
+			}
+		}
+	}
 }
