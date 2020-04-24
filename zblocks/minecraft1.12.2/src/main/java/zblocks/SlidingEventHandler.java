@@ -44,6 +44,7 @@ public class SlidingEventHandler {
 						List<EntityLivingBase> entities = world.getEntitiesWithinAABB(EntityLivingBase.class, 
 								new AxisAlignedBB(from.getX()-10, from.getY()-10, from.getZ()-10, from.getX()+10, from.getY()+10, from.getZ()+10));
 						for(EntityLivingBase ent : entities) {
+//System.out.println("found entities:"+ ent);
 							if(ent instanceof EntityPlayer) {
 								Utils.spawnParticle((EntityPlayer)ent, EnumParticleTypes.CLOUD, from);	
 							}

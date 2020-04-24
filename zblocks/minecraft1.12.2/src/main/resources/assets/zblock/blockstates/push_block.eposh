@@ -12,20 +12,19 @@
 		"inventory": {
 			"model": "zblock:push_block_model",
 			"textures": {
-				"center": "zblock:blocks/pblock128b"
+				"center": "zblock:blocks/pblock128b",
+                    "pblock128b_frozen": "zblock:blocks/pblock128b<%= echo "$seperator$color" %>"
 			}
 		},
 		"activated": {
-			"true": {
-				"textures": {
-					"center": "zblock:blocks/pblock128b_activated_anim"
-				}
-			},
-			"false": {
-				"textures": {
-					"center": "zblock:blocks/pblock128b"
-				}
-			}
-		}
-	}
+               "true": {"textures": {"center": "zblock:blocks/pblock128b_activated_anim"}},
+               "false": {"textures": {"center": "zblock:blocks/pblock128b"}
+                    }
+          },
+          "frozen": {
+               "true": {"textures": {"pblock128b_frozen": "zblock:blocks/pblock128b<%= echo "$seperator$color" %>_frozen"}},
+               "false": {"textures": {"pblock128b_frozen": "zblock:blocks/pblock128b<%= echo "$seperator$color" %>"}}
+          }
+     }
 }
+

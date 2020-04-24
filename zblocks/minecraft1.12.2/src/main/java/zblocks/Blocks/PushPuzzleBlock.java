@@ -1,9 +1,5 @@
 package zblocks.Blocks;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.Nullable;
@@ -15,7 +11,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -24,7 +19,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -39,7 +33,9 @@ import zblocks.TileEntities.ResetDataTileEntity;
 public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable, Resettable {
 
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
-	public static final int iACTIVATED = 1, iDISABLED = 0;
+	public static IProperty<Boolean> frozen = PropertyBool.create("frozen");
+	private static final int iACTIVATED = 1, iDISABLED = 0;
+	private static final int iFROZEN = 2;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
 	public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
@@ -50,14 +46,14 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		setUnlocalizedName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
 		setRegistryName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
 		this.useNeighborBrightness = true; // workaround for lighting issue - culling face not working with insets
-		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, false));
 		this.color = color;
 	}
 
 	public PushPuzzleBlock() {
-		
+
 	}
-	
+
 	// ******************************** Public Overrides ****************************************************/
 
 	@Override
@@ -70,8 +66,8 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (tile instanceof ResetDataTileEntity) {
 			return (ResetDataTileEntity) tile;
 		}
-		if(tile !=null) {
-		System.err.println("Warning invalid tile entity returned\nExpected ResetDataTileEnity got:" + tile.getClass());
+		if (tile != null) {
+			System.err.println("Warning invalid tile entity returned\nExpected ResetDataTileEnity got:" + tile.getClass());
 		}
 		return null;
 	}
@@ -84,24 +80,32 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, activated);
+		return new BlockStateContainer(this, activated,frozen);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
-			return iACTIVATED;
+		if (state == this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, true)) {
+			return iACTIVATED + iFROZEN; // 3
+		} else if (state == this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, true)) {
+			return iFROZEN; // 2
+		} else if (state == this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, true)) {
+			return iACTIVATED; // 1
 		} else {
-			return iDISABLED;
+			return iDISABLED; // 0
 		}
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int i) {
-		if (i == iACTIVATED) {
-			return this.blockState.getBaseState().withProperty(activated, true);
-		} else {
-			return this.blockState.getBaseState().withProperty(activated, false);
+		if (i == iACTIVATED + iFROZEN) { // 3
+			return this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, true);
+		} else if (i == iFROZEN) { // 2
+			return this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, true);
+		} else if (i == iACTIVATED) { // 1
+			return this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, false);
+		} else { // 0
+			return this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, false);
 		}
 	}
 
@@ -136,16 +140,35 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
-		//world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
+		// world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
 		setActivated(world, pos);
 		ResetDataTileEntity tile = getTileEntity(world, pos);
 		// first time we have placed block
 		if (tile.getStartPos() == null) {
 			tile.setStartPos(pos);
 		}
+		
+		if (world.getBlockState(pos.down()).getBlock() == Blocks.ICE) {
+			world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, true));
+		} else {
+			world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, false));
+		}
+		
 		// this.startPos = pos;
 		for (EnumFacing enumfacing : EnumFacing.VALUES) {
 			world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
+		}
+	}
+
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos neighbor) {
+		super.neighborChanged(state, world, pos, block, neighbor);
+		if (pos.down() == neighbor) {
+			if (world.getBlockState(neighbor).getBlock() == Blocks.ICE) {
+				world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, true));
+			} else {
+				world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, false));
+			}
 		}
 	}
 
@@ -216,15 +239,14 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				if (world.getBlockState(posMoveToHere.down()).getBlock() == Blocks.ICE &&
 						world.getBlockState(posMoveToHere.offset(facing).down()).getBlock() == Blocks.ICE &&
 						world.isAirBlock(posMoveToHere.offset(facing))) {
-				currentlySlidingBlocks.add(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(),hit,startPos));
+					currentlySlidingBlocks.add(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos));
 				}
 			}
-			setActivated(world,player, posMoveToHere);
+			setActivated(world, player, posMoveToHere);
 			ret = true;
 		}
 		return ret;
 	}
-
 
 	@Override
 	public ColorEnum getColor() {
@@ -261,7 +283,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				//Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+				// Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
@@ -270,7 +292,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		}
 
 	}
-	
+
 	@Override
 	public boolean matches(Matchable other) {
 		if (!this.getClass().equals(other.getMatchType())) {
