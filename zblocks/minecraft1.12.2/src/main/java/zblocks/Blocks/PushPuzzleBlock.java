@@ -1,7 +1,10 @@
 package zblocks.Blocks;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.Nullable;
 
@@ -12,6 +15,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -20,12 +24,11 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import zblocks.SlidingEventData;
 import zblocks.Utils;
 import zblocks.Blocks.Interfaces.Colored;
@@ -39,7 +42,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	public static final int iACTIVATED = 1, iDISABLED = 0;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
-	private static Queue<SlidingEventData> slidingEventData = new LinkedList<SlidingEventData>();
+	public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
 
 	// this needs to be stored in tileentity private BlockPos startPos;
 	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
@@ -67,7 +70,9 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (tile instanceof ResetDataTileEntity) {
 			return (ResetDataTileEntity) tile;
 		}
+		if(tile !=null) {
 		System.err.println("Warning invalid tile entity returned\nExpected ResetDataTileEnity got:" + tile.getClass());
+		}
 		return null;
 	}
 
@@ -131,6 +136,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
+		//world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
 		setActivated(world, pos);
 		ResetDataTileEntity tile = getTileEntity(world, pos);
 		// first time we have placed block
@@ -210,45 +216,13 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				if (world.getBlockState(posMoveToHere.down()).getBlock() == Blocks.ICE &&
 						world.getBlockState(posMoveToHere.offset(facing).down()).getBlock() == Blocks.ICE &&
 						world.isAirBlock(posMoveToHere.offset(facing))) {
-				slidingEventData.offer(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing()));
+				currentlySlidingBlocks.add(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(),hit,startPos));
 				}
 			}
-			setActivated(world, posMoveToHere);
+			setActivated(world,player, posMoveToHere);
 			ret = true;
 		}
 		return ret;
-	}
-
-	@SubscribeEvent
-	public static void onServerTick(TickEvent.ServerTickEvent event) {
-		System.out.println("tikcing");
-		if (event.phase == TickEvent.Phase.START) {
-			Queue<SlidingEventData> stillSliding = new LinkedList<SlidingEventData>();
-			while (!slidingEventData.isEmpty()) {
-				System.out.println("sliding");
-				SlidingEventData slideEvent = slidingEventData.poll();
-				World world = slideEvent.world;
-				BlockPos from = slideEvent.from;
-				EnumFacing facing = slideEvent.facing;
-				BlockPos to = from.offset(facing);
-				if (world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
-						world.getBlockState(from.offset(facing).down()).getBlock() == Blocks.ICE &&
-						world.isAirBlock(to)) {
-					Utils.spawnParticle(world, EnumParticleTypes.CLOUD, from);
-					BlockPos startPos = getTileEntity(world, from).getStartPos();
-					IBlockState fromState = world.getBlockState(from);
-					world.setBlockState(from, Blocks.AIR.getDefaultState());
-					world.setBlockState(to, fromState);// pushes the block
-					getTileEntity(world, to).setStartPos(startPos);
-					from = to;
-				}
-				if (world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
-						world.getBlockState(from.offset(facing).down()).getBlock() == Blocks.ICE) {
-					stillSliding.offer(slideEvent);
-				}
-			}
-			slidingEventData = stillSliding;
-		}
 	}
 
 
@@ -265,13 +239,13 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 //************************************* Private **************************************************************************
 
-	private void setActivated(World world, BlockPos pos) {
+	private void setActivated(World world, EntityPlayer player, BlockPos pos) {
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
 
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				Utils.spawnParticle(world, EnumParticleTypes.CRIT_MAGIC, pos);
+				Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
@@ -281,6 +255,22 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 	}
 
+	private void setActivated(World world, BlockPos pos) {
+		Block downBlock = world.getBlockState(pos.down()).getBlock();
+
+		if (downBlock instanceof Matchable) {
+			if (this.matches((Matchable) downBlock)) {
+				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
+				//Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+				world.notifyNeighborsOfStateChange(pos.down(), this, true);
+			} else {
+				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
+				world.notifyNeighborsOfStateChange(pos.down(), this, true);
+			}
+		}
+
+	}
+	
 	@Override
 	public boolean matches(Matchable other) {
 		if (!this.getClass().equals(other.getMatchType())) {

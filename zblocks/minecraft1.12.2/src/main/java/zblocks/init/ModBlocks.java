@@ -67,7 +67,8 @@ public class ModBlocks {
 		final SoundEvent[] soundEvents = {
 				new SoundEvent(new ResourceLocation(Reference.MODID, "thud_delay")).setRegistryName("thud_delay"),
 				new SoundEvent(new ResourceLocation(Reference.MODID, "scrape")).setRegistryName("scrape"),
-				new SoundEvent(new ResourceLocation(Reference.MODID, "warp")).setRegistryName("warp")
+				new SoundEvent(new ResourceLocation(Reference.MODID, "warp")).setRegistryName("warp"),
+				new SoundEvent(new ResourceLocation(Reference.MODID, "clink")).setRegistryName("clink")
 			};
 			event.getRegistry().registerAll(soundEvents);
 	}
