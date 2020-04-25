@@ -1,7 +1,9 @@
 package zblocks;
 
+import java.util.HashSet;
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,16 +21,11 @@ import zblocks.Blocks.PushPuzzleBlock;
 
 public class SlidingEventHandler {
 	private static int tickCount = 0;
-
-	/*
-	 * @SubscribeEvent public static void onServerTick(TickEvent.ServerTickEvent event) { if (event.phase == TickEvent.Phase.START && ++tickCount == 3) { tickCount = 0; int initialSlidingEventDataArrayListLength = PushPuzzleBlock.currentlySlidingBlocks.size(); for (int i = initialSlidingEventDataArrayListLength - 1; i >= 0; i--) { try { SlidingEventData slideEvent = PushPuzzleBlock.currentlySlidingBlocks.get(i); PushPuzzleBlock.currentlySlidingBlocks.remove(i); World world = slideEvent.world; BlockPos from = slideEvent.from; EnumFacing facing = slideEvent.facing; BlockPos to = from.offset(facing); // slide block forward 1 if (world.getBlockState(from.down()).getBlock() == Blocks.ICE && world.getBlockState(to.down()).getBlock() == Blocks.ICE && world.isAirBlock(to)) { List<EntityLivingBase>
-	 * entities = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(from.getX()-10, from.getY()-10, from.getZ()-10, from.getX()+10, from.getY()+10, from.getZ()+10)); for(EntityLivingBase ent : entities) { //System.out.println("found entities:"+ ent); if(ent instanceof EntityPlayer) { System.out.println("spawning particle?"); Utils.spawnParticle((EntityPlayer)ent, EnumParticleTypes.CLOUD, from); } } world.setBlockState(from, Blocks.AIR.getDefaultState()); world.setBlockState(to, slideEvent.block);// pushes the block PushPuzzleBlock.getTileEntity(world, to).setStartPos(slideEvent.resetPos); from = to; to = from.offset(facing); } if (world.getBlockState(from.down()).getBlock() == Blocks.ICE && world.getBlockState(to.down()).getBlock() == Blocks.ICE && world.isAirBlock(to)) {
-	 * // block is still sliding PushPuzzleBlock.currentlySlidingBlocks.add(new SlidingEventData(world, from, facing, slideEvent.block, slideEvent.resetPos)); } // stopped sliding test if interrupted or ice came to natural end else { if (world.getBlockState(from.down()).getBlock() == Blocks.ICE && world.getBlockState(to.down()).getBlock() == Blocks.ICE) { ResourceLocation location = new ResourceLocation("zblock", "clink"); world.playSound(null, from.getX(), from.getY(), from.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS, 3f, 1f); } } } catch (Exception e) { e.printStackTrace(); } } } }
-	 */
+	private static final int DELAY = 3;
 
 	@SubscribeEvent
 	public static void onServerTick(TickEvent.ServerTickEvent event) {
-		if (event.phase == TickEvent.Phase.START && ++tickCount == 3) {
+		if (event.phase == TickEvent.Phase.START && ++tickCount == DELAY) {
 			tickCount = 0;
 			for (SlidingEventData slideEvent : PushPuzzleBlock.currentlySlidingBlocks) {
 					World world = slideEvent.world;
@@ -51,9 +48,7 @@ public class SlidingEventHandler {
 					// stopped sliding test if interrupted or ice came to natural end
 					else {
 						if (isSliding(world,from,to)) {
-							ResourceLocation location = new ResourceLocation("zblock", "clink");
-							world.playSound(null, from.getX(), from.getY(), from.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS,
-									3f, 1f);
+							Utils.playSound(world, from, "clink", SoundCategory.BLOCKS, 2.5f);
 						}
 					}
 			}
@@ -71,13 +66,19 @@ public class SlidingEventHandler {
 	}
 	
 	public static boolean isSlidingAndFrontIsClear(World world, BlockPos from, BlockPos to) {
-		return world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
-				world.getBlockState(to.down()).getBlock() == Blocks.ICE &&
-				world.isAirBlock(to);
+		return isSliding(world,from,to) && world.isAirBlock(to);
 	}
 	
 	public static boolean isSliding(World world, BlockPos from, BlockPos to) {
-		return world.getBlockState(from.down()).getBlock() == Blocks.ICE &&
-				world.getBlockState(to.down()).getBlock() == Blocks.ICE;
+		HashSet<Block> blocks = new HashSet<Block>();
+		blocks.add(Blocks.ICE);
+		blocks.add(Blocks.FROSTED_ICE);
+		blocks.add(Blocks.PACKED_ICE);
+		Block blue_ice = Block.getBlockFromName("futuremc:blue_ice");
+		if(blue_ice !=null) {
+			blocks.add(blue_ice);
+		}
+		return blocks.contains(world.getBlockState(from.down()).getBlock()) &&
+				blocks.contains(world.getBlockState(to.down()).getBlock());
 	}
 }

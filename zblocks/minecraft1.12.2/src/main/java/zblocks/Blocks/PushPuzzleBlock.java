@@ -147,7 +147,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		ResetDataTileEntity tile = getTileEntity(world, pos);
 		// first time we have placed block
 		if (tile.getStartPos() == null) {
-			System.out.println("setting start pos");
 			tile.setStartPos(pos);
 		}
 		
@@ -197,10 +196,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 		if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 		{
-			ResourceLocation location = new ResourceLocation("zblock", "thud_delay");
-			// SoundEvent event = new SoundEvent(location);
-			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location),
-					SoundCategory.BLOCKS, 1f, 1f);
+			Utils.playSound(world, pos, "thud_delay", SoundCategory.BLOCKS, 1f);
 		}
 	}
 
@@ -212,11 +208,8 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 			{
 				// don't play scrape if block will fall
-				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).offset(EnumFacing.DOWN)))) {
-					ResourceLocation location = new ResourceLocation("zblock", "scrape");
-					// SoundEvent event = new SoundEvent(location);
-					world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS,
-							1f, 1f);
+				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).down()))) {
+					Utils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f);
 				}
 			}
 		}
@@ -232,10 +225,11 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				&& world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) {
 			if (!world.isRemote) {
 				// world.destroyBlock(pos, false);
-				BlockPos startPos = getTileEntity(world, pos).getStartPos();
+				ResetDataTileEntity tile = getTileEntity(world, pos);
+				BlockPos startPos = tile.getStartPos();
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				world.setBlockState(posMoveToHere, hit);// pushes the block
-				getTileEntity(world, posMoveToHere).setStartPos(startPos);
+				tile.setStartPos(startPos);
 
 				EnumFacing facing = player.getHorizontalFacing();
 				if (SlidingEventHandler.isSlidingAndFrontIsClear(world,posMoveToHere,posMoveToHere.offset(facing))) {

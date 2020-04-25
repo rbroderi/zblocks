@@ -2,7 +2,11 @@ package zblocks;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class Utils {
 	public static boolean isOdd(int i) {
@@ -35,5 +39,10 @@ public class Utils {
 
 	public static void spawnParticle(EntityPlayer player, EnumParticleTypes type, BlockPos pos) {
 		spawnParticle(player, type, pos.getX(), pos.getY(), pos.getZ());
+	}
+	public static void playSound(World world,BlockPos pos,String sound,  SoundCategory soundCat, float volume) {
+		ResourceLocation location = new ResourceLocation("zblock", sound);
+		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location), soundCat,
+				volume, 1f);
 	}
 }

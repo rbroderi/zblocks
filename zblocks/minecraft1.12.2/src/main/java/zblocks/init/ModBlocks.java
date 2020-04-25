@@ -21,6 +21,7 @@ import zblocks.Reference;
 import zblocks.Blocks.DepressPuzzleBlock;
 import zblocks.Blocks.Hourglass;
 import zblocks.Blocks.PushPuzzleBlock;
+import zblocks.Blocks.StartPuzzleBlock;
 import zblocks.Blocks.Interfaces.Colored.ColorEnum;
 import zblocks.TileEntities.ResetDataTileEntity;
 
@@ -37,6 +38,9 @@ public class ModBlocks {
 		}
 		for(ColorEnum c: ColorEnum.values()) {
 		blockList.add(new DepressPuzzleBlock("depress_block", Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
+		}
+		for(ColorEnum c: ColorEnum.values()) {
+		blockList.add(new StartPuzzleBlock("start_block",Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 		blockList.add(new Hourglass("hourglass", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(8.0f/15f));
 		//blockList.add(new PushPuzzleBlock("push_block_blue", Material.ROCK,ColorEnum.BLUE).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
