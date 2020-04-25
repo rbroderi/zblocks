@@ -24,6 +24,7 @@ import zblocks.Blocks.PushPuzzleBlock;
 import zblocks.Blocks.StartPuzzleBlock;
 import zblocks.Blocks.Interfaces.Colored.ColorEnum;
 import zblocks.TileEntities.ResetDataTileEntity;
+import zblocks.Utility.JSONReader;
 
 @Mod.EventBusSubscriber(modid=Reference.MODID)
 public class ModBlocks {
@@ -68,13 +69,21 @@ public class ModBlocks {
 		
 	@SubscribeEvent
 	public static void registerSounds(RegistryEvent.Register<SoundEvent> event){
+		/*
 		final SoundEvent[] soundEvents = {
 				new SoundEvent(new ResourceLocation(Reference.MODID, "thud_delay")).setRegistryName("thud_delay"),
 				new SoundEvent(new ResourceLocation(Reference.MODID, "scrape")).setRegistryName("scrape"),
 				new SoundEvent(new ResourceLocation(Reference.MODID, "warp")).setRegistryName("warp"),
 				new SoundEvent(new ResourceLocation(Reference.MODID, "clink")).setRegistryName("clink")
 			};
-			event.getRegistry().registerAll(soundEvents);
+			*/
+		//read sounds.json and register sounds
+		JSONReader reader = new JSONReader("assets/zblock/sounds.json");
+		ArrayList<SoundEvent> soundEvents= new ArrayList<SoundEvent>();
+		for(String sound:reader.getSounds()) {
+			soundEvents.add(new SoundEvent(new ResourceLocation(Reference.MODID,sound)).setRegistryName(sound));
+		}
+			event.getRegistry().registerAll(soundEvents.toArray(new SoundEvent[0]));
 	}
 	
 	public static void registerRender(Item item) {

@@ -1,7 +1,5 @@
 package zblocks.Blocks;
 
-import java.util.concurrent.CopyOnWriteArrayList;
-
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -16,21 +14,19 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import zblocks.EphemeralQueue;
 import zblocks.SlidingEventData;
 import zblocks.SlidingEventHandler;
-import zblocks.Utils;
 import zblocks.Blocks.Interfaces.Colored;
 import zblocks.Blocks.Interfaces.Matchable;
 import zblocks.Blocks.Interfaces.Resettable;
 import zblocks.TileEntities.ResetDataTileEntity;
+import zblocks.Utility.EphemeralQueue;
+import zblocks.Utility.StaticUtils;
 
 public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable, Resettable {
 
@@ -40,9 +36,9 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	private static final int iFROZEN = 2;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
-	//public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
+	// public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
 	public static EphemeralQueue<SlidingEventData> currentlySlidingBlocks = new EphemeralQueue<SlidingEventData>();
-	
+
 	// this needs to be stored in tileentity private BlockPos startPos;
 	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
 		super(material);
@@ -83,7 +79,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 	@Override
 	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, activated,frozen);
+		return new BlockStateContainer(this, activated, frozen);
 	}
 
 	@Override
@@ -149,13 +145,13 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (tile.getStartPos() == null) {
 			tile.setStartPos(pos);
 		}
-		
+
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.ICE) {
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, true));
 		} else {
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, false));
 		}
-		
+
 		// this.startPos = pos;
 		for (EnumFacing enumfacing : EnumFacing.VALUES) {
 			world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
@@ -196,7 +192,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 		if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 		{
-			Utils.playSound(world, pos, "thud_delay", SoundCategory.BLOCKS, 1f);
+			StaticUtils.playSound(world, pos, "thud_delay", SoundCategory.BLOCKS, 1f);
 		}
 	}
 
@@ -209,7 +205,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			{
 				// don't play scrape if block will fall
 				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).down()))) {
-					Utils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f);
+					StaticUtils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f);
 				}
 			}
 		}
@@ -221,7 +217,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		boolean ret = false;
 		IBlockState hit = world.getBlockState(pos);
 		// player has hit block, is next to this block, the block does not have anything on top of it, and has a space to slide into
-		if (hit.getBlock().equals(this) && Utils.isNextTo(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
+		if (hit.getBlock().equals(this) && StaticUtils.isNextTo(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
 				&& world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) {
 			if (!world.isRemote) {
 				// world.destroyBlock(pos, false);
@@ -232,7 +228,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				tile.setStartPos(startPos);
 
 				EnumFacing facing = player.getHorizontalFacing();
-				if (SlidingEventHandler.isSlidingAndFrontIsClear(world,posMoveToHere,posMoveToHere.offset(facing))) {
+				if (SlidingEventHandler.isSlidingAndFrontIsClear(world, posMoveToHere, posMoveToHere.offset(facing))) {
 					currentlySlidingBlocks.enqueue(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos));
 				}
 			}
@@ -261,7 +257,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+				StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
@@ -277,8 +273,9 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				// Utils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+				// StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
+				StaticUtils.playSound(world, pos, "activate", SoundCategory.BLOCKS, 1f);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);

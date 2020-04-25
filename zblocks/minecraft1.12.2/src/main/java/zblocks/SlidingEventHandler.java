@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import zblocks.Blocks.PushPuzzleBlock;
+import zblocks.Utility.StaticUtils;
 
 public class SlidingEventHandler {
 	private static int tickCount = 0;
@@ -48,7 +49,7 @@ public class SlidingEventHandler {
 					// stopped sliding test if interrupted or ice came to natural end
 					else {
 						if (isSliding(world,from,to)) {
-							Utils.playSound(world, from, "clink", SoundCategory.BLOCKS, 2.5f);
+							StaticUtils.playSound(world, from, "clink", SoundCategory.BLOCKS, 2.5f);
 						}
 					}
 			}
@@ -60,7 +61,7 @@ public class SlidingEventHandler {
 				new AxisAlignedBB(pos.getX() - 10, pos.getY() - 10, pos.getZ() - 10, pos.getX() + 10, pos.getY() + 10, pos.getZ() + 10));
 		for (EntityLivingBase ent : entities) {
 			if (ent instanceof EntityPlayer) {
-				Utils.spawnParticle((EntityPlayer) ent, EnumParticleTypes.CLOUD, pos);
+				StaticUtils.spawnParticle((EntityPlayer) ent, EnumParticleTypes.CLOUD, pos);
 			}
 		}
 	}

@@ -18,5 +18,10 @@
     "category": "block",
     "subtitle": "zblock.subtitle.clink",
     "sounds": [ "zblock:clink" ]
+  },
+    "activate": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.activate",
+    "sounds": [ "zblock:activate" ]
   }
 }

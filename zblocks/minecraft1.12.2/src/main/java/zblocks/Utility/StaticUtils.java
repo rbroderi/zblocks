@@ -1,4 +1,4 @@
-package zblocks;
+package zblocks.Utility;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
@@ -8,7 +8,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Utils {
+public class StaticUtils {
 	public static boolean isOdd(int i) {
 		return (i & 1) != 0;
 	}
