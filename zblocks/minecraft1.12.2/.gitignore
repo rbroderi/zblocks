@@ -26,7 +26,6 @@ eclipse
 run
 exclude
 logs
-libs
 README.txt
 LICENSE-Paul*
 LICENSE.txt
