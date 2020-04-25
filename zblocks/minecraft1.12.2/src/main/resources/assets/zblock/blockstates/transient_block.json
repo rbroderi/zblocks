@@ -1,0 +1,16 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "zblock:transient_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:transient_trans_model"
+			},
+		"activated": {
+			"true": {},
+			"false": {}
+		}
+	}
+}

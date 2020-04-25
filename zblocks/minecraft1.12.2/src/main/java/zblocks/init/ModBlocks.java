@@ -44,6 +44,7 @@ public class ModBlocks {
 		blockList.add(new StartPuzzleBlock("start_block",Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 		blockList.add(new Hourglass("hourglass", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(8.0f/15f));
+		blockList.add(new Hourglass("transient_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(5.0f/15f));
 		//blockList.add(new PushPuzzleBlock("push_block_blue", Material.ROCK,ColorEnum.BLUE).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
 		GameRegistry.registerTileEntity(ResetDataTileEntity.class, new ResourceLocation(Reference.MODID, "resetdatatileentity"));
 	}	

@@ -13,7 +13,7 @@ public class StartPuzzleBlock extends Block implements Colored {
 		setRegistryName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
 		this.color = color;
 	}
-
+	
 	@Override
 	public ColorEnum getColor() {
 	return this.color;
