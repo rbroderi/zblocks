@@ -21,7 +21,7 @@ public class TransientPuzzleBlock extends Block implements Matchable{
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, true));
 	}
 	@Override
 	public BlockStateContainer createBlockState() {

@@ -1,7 +1,7 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "zblock:transient_model",
+		"model": "zblock:transient_block_model",
 		"uvlock": false
 	},
 	"variants": {
@@ -9,8 +9,8 @@
 			"model": "zblock:transient_trans_model"
 			},
 		"activated": {
-			"true": {},
-			"false": {}
+			"true": {"textures": {"eye": "minecraft:blocks/transient_block"}},
+			"false": {"textures": {"eye": "minecraft:blocks/transient_block_deactivated"}}
 		}
 	}
 }
