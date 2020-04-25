@@ -23,7 +23,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import zblocks.EphemeralQueue;
 import zblocks.SlidingEventData;
+import zblocks.SlidingEventHandler;
 import zblocks.Utils;
 import zblocks.Blocks.Interfaces.Colored;
 import zblocks.Blocks.Interfaces.Matchable;
@@ -38,8 +40,9 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	private static final int iFROZEN = 2;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
-	public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
-
+	//public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
+	public static EphemeralQueue<SlidingEventData> currentlySlidingBlocks = new EphemeralQueue<SlidingEventData>();
+	
 	// this needs to be stored in tileentity private BlockPos startPos;
 	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
 		super(material);
@@ -140,11 +143,11 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
 		super.onBlockAdded(world, pos, state);
-		// world.getEntitiesWithinAABB(EntityLivingBase.class, bb);
 		setActivated(world, pos);
 		ResetDataTileEntity tile = getTileEntity(world, pos);
 		// first time we have placed block
 		if (tile.getStartPos() == null) {
+			System.out.println("setting start pos");
 			tile.setStartPos(pos);
 		}
 		
@@ -234,12 +237,9 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				world.setBlockState(posMoveToHere, hit);// pushes the block
 				getTileEntity(world, posMoveToHere).setStartPos(startPos);
 
-				// causes block to slide across ice, TODO implement sliding block state (ice on bottom of block?) as well as noise when it comes to stop
 				EnumFacing facing = player.getHorizontalFacing();
-				if (world.getBlockState(posMoveToHere.down()).getBlock() == Blocks.ICE &&
-						world.getBlockState(posMoveToHere.offset(facing).down()).getBlock() == Blocks.ICE &&
-						world.isAirBlock(posMoveToHere.offset(facing))) {
-					currentlySlidingBlocks.add(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos));
+				if (SlidingEventHandler.isSlidingAndFrontIsClear(world,posMoveToHere,posMoveToHere.offset(facing))) {
+					currentlySlidingBlocks.enqueue(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos));
 				}
 			}
 			setActivated(world, player, posMoveToHere);
