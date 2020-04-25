@@ -6,11 +6,11 @@
 	},
 	"variants": {
 		"inventory": {
-			"model": "zblock:transient_trans_model"
+			"model": "zblock:transient_block_model"
 			},
 		"activated": {
-			"true": {"textures": {"eye": "minecraft:blocks/transient_block"}},
-			"false": {"textures": {"eye": "minecraft:blocks/transient_block_deactivated"}}
+			"true": {"textures": {"eye": "zblock:blocks/transient_block"}},
+			"false": {"textures": {"eye": "zblock:blocks/transient_block_deactivated"}}
 		}
 	}
 }

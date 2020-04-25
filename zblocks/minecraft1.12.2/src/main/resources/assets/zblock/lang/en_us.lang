@@ -20,3 +20,4 @@ tile.push_block_yellow.name=Yellow Push Puzzle Block
 tile.depress_block_yellow.name=Yellow Depressible Puzzle Block
 tile.start_block_yellow.name=Yellow Starting Puzzle Block
 tile.hourglass.name=Hourglass
+tile.transient_block.name=Transient Puzzle Block
