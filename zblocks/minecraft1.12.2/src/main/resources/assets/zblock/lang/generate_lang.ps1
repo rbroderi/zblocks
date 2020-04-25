@@ -19,6 +19,7 @@ $colorSpace=$color+" "
 $TextInfo = (Get-Culture).TextInfo
 $output+= "tile.push_block$seperator$color.name=$($TextInfo.ToTitleCase($colorSpace))Push Puzzle Block"+ "`n"
 $output+= "tile.depress_block$seperator$color.name=$($TextInfo.ToTitleCase($colorSpace))Depressible Puzzle Block" + "`n"
+$output+= "tile.start_block$seperator$color.name=$($TextInfo.ToTitleCase($colorSpace))Starting Puzzle Block"+ "`n"
 }
 $output+= "tile.hourglass.name=Hourglass" + "`n"
 $output.Trim() | Out-File -Encoding ASCII $PSScriptRoot\en_us.lang

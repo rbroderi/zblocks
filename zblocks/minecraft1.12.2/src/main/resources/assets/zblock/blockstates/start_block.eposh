@@ -1,0 +1,16 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"top": "zblock:blocks/start_block<%= echo "$seperator$color" %>"
+		},
+		"model": "zblock:start_block_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:start_block_model"
+			},
+          "normal": [{}]
+	}
+}

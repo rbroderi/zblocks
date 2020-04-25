@@ -14,5 +14,6 @@ $seperator = "_"
 }
 Invoke-EpsTemplate -Path $PSScriptRoot\push_block.eposh | Out-File -Encoding ascii "$PSScriptRoot\push_block$seperator$color.json"
 Invoke-EpsTemplate -Path $PSScriptRoot\depress_block.eposh | Out-File -Encoding ascii "$PSScriptRoot\depress_block$seperator$color.json"
+Invoke-EpsTemplate -Path $PSScriptRoot\start_block.eposh | Out-File -Encoding ascii "$PSScriptRoot\start_block$seperator$color.json"
 }
 
