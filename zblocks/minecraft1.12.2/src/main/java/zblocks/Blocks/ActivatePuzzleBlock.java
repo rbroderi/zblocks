@@ -1,21 +1,24 @@
 package zblocks.Blocks;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 import java.util.Queue;
-import java.util.Stack;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -28,16 +31,60 @@ import zblocks.Blocks.Interfaces.Matchable;
 import zblocks.Utility.StaticUtils;
 
 public class ActivatePuzzleBlock extends Block implements Matchable {
+	
+	public enum ActivationEnum implements IStringSerializable {
+		DEACTIVATED(0), HIT(1), REDSTONE(3);
+
+		private final int value;
+		private final static Map<Integer, ActivationEnum> lookup;
+	    static {
+	    	Map<Integer, ActivationEnum> lookupTemp = new HashMap<Integer,ActivationEnum>();
+	        for(ActivationEnum e: ActivationEnum.values()) {
+	        	lookupTemp.put(e.getValue(), e);
+	        }
+	        
+	       lookup = Collections.unmodifiableMap(lookupTemp);
+	    }
+		private ActivationEnum(int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
+		public static ActivationEnum getByValue(int i) {
+			/*
+			switch(i) {
+			case 0:
+				return DEACTIVATED;
+			case 1:
+				return HIT;
+			case 2:
+				return REDSTONE;
+			default:
+				return DEACTIVATED;
+			}*/
+			return lookup.get(i);
+		}
+
+		@Override
+		// Property names (in your case probably returned by IStringSerializable::getName) must be all lowercase, in fact they must match
+		// the regular expression [a-z0-9_]+.
+		public String getName() {
+			return this.name().toLowerCase();
+		}
+	}
+	
+	
 	private Class<TransientPuzzleBlock> matchType = TransientPuzzleBlock.class;
-	public static IProperty<Boolean> activated = PropertyBool.create("activated");
-	public static final int iACTIVATED = 1, iDISABLED = 0;
+	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated",ActivationEnum.class);
 	private Queue<Entity> ignoreList = new LinkedList<Entity>();
 
 	public ActivatePuzzleBlock(String name, Material material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
+		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, ActivationEnum.DEACTIVATED));
 	}
 
 	// For correct lighting around the block
@@ -60,19 +107,14 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		//return new AxisAlignedBB(0.188, 0, 0.125, 0.812, 0.900, 0.812);
-		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
-	}
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		// TODO Auto-generated method stub
+		// return new AxisAlignedBB(0.188, 0, 0.125, 0.812, 0.900, 0.812);
 		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
 	}
 
-	/*
-	 * @Override public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) { // TODO Auto-generated method stub return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9); }
-	 */
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
+	}
 
 	/**
 	 * toggle activation with hits by arrow
@@ -86,22 +128,20 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 				if (ignoreList.size() > 1000) {
 					ignoreList.poll();
 				}
-				if (isNew && state == this.blockState.getBaseState().withProperty(activated, false)) {
+				if (isNew && state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.DEACTIVATED)) {
 					// ejectEntityLiving(world,player, pos);
-					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
+					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
 					setNearbyMatchesActivation(worldIn, pos, true);
 					StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 				} else if (isNew) {
 					// worldIn.removeEntity(entityIn);
-					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
+					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED));
 					setNearbyMatchesActivation(worldIn, pos, false);
 					StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 				}
 			}
-			// worldIn.removeEntity(entityIn);
 		}
 	}
-
 
 	/**
 	 * When left-clicked toggle activation
@@ -111,13 +151,13 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 		if (!world.isRemote) {
 			// super.onBlockClicked(world, pos, player);
 			if (StaticUtils.isNextToAndNoYMotion(player, pos, 1.94f)) {
-				if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
+				if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, ActivationEnum.DEACTIVATED)) {
 					// ejectEntityLiving(world,player, pos);
-					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, true));
+					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
 					setNearbyMatchesActivation(world, pos, true);
 					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 				} else {
-					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, false));
+					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
 					setNearbyMatchesActivation(world, pos, false);
 					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 
@@ -128,7 +168,8 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public int getLightValue(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
+		if (state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.HIT) ||
+				state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.REDSTONE)) {
 			return 15;
 		}
 		return 0;
@@ -156,29 +197,63 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if (state.equals(this.blockState.getBaseState().withProperty(activated, true))) {
-			return iACTIVATED;
-		} else {
-			return iDISABLED;
+		if (state ==this.blockState.getBaseState().withProperty(activated, ActivationEnum.HIT)) {
+			return ActivationEnum.HIT.getValue();
+		} else if(state ==this.blockState.getBaseState().withProperty(activated, ActivationEnum.REDSTONE)){
+			return ActivationEnum.REDSTONE.getValue();
+		}else {
+			return ActivationEnum.DEACTIVATED.getValue();
 		}
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int i) {
-		if (i == iACTIVATED) {
-			return this.blockState.getBaseState().withProperty(activated, true);
-		} else {
-			return this.blockState.getBaseState().withProperty(activated, false);
-		}
+		return this.blockState.getBaseState().withProperty(activated, ActivationEnum.getByValue(i));
+	}
+	
+	
+	
+	@Override
+	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		return true;
 	}
 
-	/*
-	 * // causes crash
-	 * 
-	 * @SuppressWarnings("deprecation")
-	 * 
-	 * @Override public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) { int ret = 0; for (EnumFacing facing : EnumFacing.VALUES) { if (getWeakPower(state, blockAccess, pos.offset(facing), facing) > 0) { if (blockAccess instanceof World) { ((World) blockAccess).setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3); ret = 15; } } } return ret == 15 ? ret : super.getWeakPower(state, blockAccess, pos, side); }
-	 */
+	@Override    
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        if (!worldIn.isRemote)
+        {
+        	Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.HIT) || 
+        			state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
+            if (isAct && !worldIn.isBlockPowered(pos))
+            {
+                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
+				setNearbyMatchesActivation(worldIn, pos, false);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+            }
+            else if (!isAct && worldIn.isBlockPowered(pos))
+            {
+				setNearbyMatchesActivation(worldIn, pos, true);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
+            }
+        }
+    }
+	
+	@Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    {
+        if (!worldIn.isRemote)
+        {
+        	Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
+            if (isAct && !worldIn.isBlockPowered(pos))
+            {
+                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
+				setNearbyMatchesActivation(worldIn, pos, false);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+            }
+        }
+    }
 
 	@Override
 	public boolean matches(Matchable other) {

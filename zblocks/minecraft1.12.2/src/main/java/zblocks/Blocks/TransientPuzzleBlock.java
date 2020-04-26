@@ -146,23 +146,6 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 		}
 	}
 
-	/*
-	 * // causes crash
-	 * 
-	 * @SuppressWarnings("deprecation")
-	 * 
-	 * @Override public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) { int ret = 0; for (EnumFacing facing : EnumFacing.VALUES) { if (getWeakPower(state, blockAccess, pos.offset(facing), facing) > 0) { if (blockAccess instanceof World) { ((World) blockAccess).setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3); ret = 15; } } } return ret == 15 ? ret : super.getWeakPower(state, blockAccess, pos, side); }
-	 */
-
-	/**
-	 * Returns powered if any block around it is powered
-	 */
-	@SuppressWarnings("deprecation")
-	@Override
-	public int getStrongPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return getWeakPower(state, blockAccess, pos, side);
-	}
-
 	@Override
 	public boolean matches(Matchable other) {
 		return other.getClass() == getMatchType();

@@ -9,8 +9,9 @@
 			"model": "zblock:activate_block_model"
 			},
 		"activated": {
-			"true": {"textures": {"crystal": "zblock:blocks/crystal"}},
-			"false": {"textures": {"crystal": "zblock:blocks/crystal_blue"}}
+			"hit": {"textures": {"crystal": "zblock:blocks/crystal_yellow"}},
+			"redstone": {"textures": {"crystal": "zblock:blocks/crystal"}},
+			"deactivated": {"textures": {"crystal": "zblock:blocks/crystal_blue"}}
 		}
 	}
 }
