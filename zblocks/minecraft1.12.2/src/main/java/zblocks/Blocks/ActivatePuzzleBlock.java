@@ -10,12 +10,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zblocks.Blocks.Interfaces.Activatable;
 import zblocks.Blocks.Interfaces.Matchable;
 import zblocks.Utility.StaticUtils;
 
@@ -35,21 +37,13 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	// For correct lighting around the block
 	@Override
 	public boolean isFullCube(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
-			return false;
-		} else {
-			return true;
-		}
+		return false;
 	}
 
 	// For rendering of block underneath
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
-			return false;
-		} else {
-			return true;
-		}
+		return false;
 	}
 
 	@Override
@@ -57,6 +51,13 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
+	
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+		return new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+	}
+
 
 	/**
 	 * toggle activation with hits by arrow
@@ -68,9 +69,13 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 			if (state == this.blockState.getBaseState().withProperty(activated, false)) {
 				//ejectEntityLiving(world,player, pos);
 				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
+				setNearbyMatchesActivation(worldIn,pos,true);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 			} else {
-				worldIn.removeEntity(entityIn);
+				//worldIn.removeEntity(entityIn);
 				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
+				setNearbyMatchesActivation(worldIn,pos,false);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 			}
 		}
 		//worldIn.removeEntity(entityIn);
@@ -86,8 +91,36 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 			if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
 				//ejectEntityLiving(world,player, pos);
 				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, true));
+				setNearbyMatchesActivation(world,pos,true);
+				StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 			} else {
 				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, false));
+				setNearbyMatchesActivation(world,pos,false);
+				StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+
+			}
+		}
+	}
+	
+	@Override
+	public int getLightValue(IBlockState state) {
+		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
+			return 15;
+		}
+		return 0;
+	}
+
+//searches 100x50x100 area
+	private void setNearbyMatchesActivation(World world,BlockPos pos, boolean value) {
+		BlockPos northWest = pos.north(50).west(50).up(25);
+		BlockPos southEast = pos.south(50).east(50).down(25);
+		for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
+			Block block = world.getBlockState(bPos).getBlock();
+			if (block instanceof Matchable && this.matches((Matchable) block) && block instanceof Activatable) {
+				bPos = bPos.toImmutable();
+				Matchable match = ((Matchable) block);
+				Activatable act = (Activatable) match;
+				world.setBlockState(bPos, block.getDefaultState().withProperty(act.getActivatedIProperty(),value));
 			}
 		}
 	}
@@ -125,8 +158,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public boolean matches(Matchable other) {
-		// TODO Auto-generated method stub
-		return false;
+		return other.getClass() == getMatchType();
 	}
 
 	@Override

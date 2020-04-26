@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"crystal": "zblock:blocks/crystal_blue",
-		"base": "zblock:blocks/sandstone_top",
+		"base": "minecraft:blocks/obsidian",
 		"particle": "zblock:blocks/crystal_75"
 	},
 	"elements": [

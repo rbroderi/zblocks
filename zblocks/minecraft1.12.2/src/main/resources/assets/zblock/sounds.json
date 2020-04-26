@@ -23,5 +23,10 @@
     "category": "block",
     "subtitle": "zblock.subtitle.activate",
     "sounds": [ "zblock:activate" ]
+  },
+    "glass_ting": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.glass_ting",
+    "sounds": [ "zblock:glass_ting" ]
   }
 }

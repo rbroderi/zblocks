@@ -2,8 +2,6 @@ package zblocks.Blocks;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -12,22 +10,18 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zblocks.Blocks.Interfaces.Activatable;
 import zblocks.Blocks.Interfaces.Matchable;
-import zblocks.Utility.StaticUtils;
 
-public class TransientPuzzleBlock extends Block implements Matchable {
+public class TransientPuzzleBlock extends Block implements Matchable,Activatable {
 	private Class<ActivatePuzzleBlock> matchType = ActivatePuzzleBlock.class;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
@@ -123,40 +117,6 @@ public class TransientPuzzleBlock extends Block implements Matchable {
 		return super.doesSideBlockRendering(state, world, pos, face);
 	}
 
-	/**
-	 * toggle activation with hits by arrow
-	 */
-	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		// super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-		if (entityIn instanceof IProjectile) {
-			if (state == this.blockState.getBaseState().withProperty(activated, false)) {
-				//ejectEntityLiving(world,player, pos);
-				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
-			} else {
-				worldIn.removeEntity(entityIn);
-				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
-			}
-		}
-		//worldIn.removeEntity(entityIn);
-	}
-
-	/**
-	 * When left-clicked knockback all living entities inside block and toggle activation
-	 */
-	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-		// super.onBlockClicked(world, pos, player);
-		if (StaticUtils.isNextToAndNoYMotion(player, pos, 1.94f)) {
-			if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
-				//ejectEntityLiving(world,player, pos);
-				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, true));
-			} else {
-				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, false));
-			}
-		}
-	}
-
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -191,6 +151,7 @@ public class TransientPuzzleBlock extends Block implements Matchable {
 	/**
 	 * Returns powered if any block around it is powered
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public int getStrongPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		return getWeakPower(state, blockAccess, pos, side);
@@ -198,8 +159,7 @@ public class TransientPuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public boolean matches(Matchable other) {
-		// TODO Auto-generated method stub
-		return false;
+		return other.getClass() == getMatchType();
 	}
 
 	@Override
@@ -209,8 +169,12 @@ public class TransientPuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public Object getTrait() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public IProperty<Boolean> getActivatedIProperty() {
+		return activated;
 	}
 
 }
