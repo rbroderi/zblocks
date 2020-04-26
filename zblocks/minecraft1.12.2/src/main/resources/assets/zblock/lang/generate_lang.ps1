@@ -23,4 +23,5 @@ $output+= "tile.start_block$seperator$color.name=$($TextInfo.ToTitleCase($colorS
 }
 $output+= "tile.hourglass.name=Hourglass" + "`n"
 $output+= "tile.transient_block.name=Transient Puzzle Block" + "`n"
+$output+= "tile.activate_block.name=Activate Puzzle Block" + "`n"
 $output.Trim() | Out-File -Encoding ASCII $PSScriptRoot\en_us.lang

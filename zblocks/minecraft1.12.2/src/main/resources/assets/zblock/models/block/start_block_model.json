@@ -2,7 +2,8 @@
     "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
     "textures": {
         "sandstone_carved": "minecraft:blocks/sandstone_carved",
-        "top": "zblock:blocks/start_block"
+        "top": "zblock:blocks/start_block",
+        "particle": "minecraft:blocks/sandstone_carved"
     },
     "display": {
         "gui": {

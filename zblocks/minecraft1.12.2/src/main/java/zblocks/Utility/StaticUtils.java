@@ -1,5 +1,7 @@
 package zblocks.Utility;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -9,6 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class StaticUtils {
+	private final static float CLOSE = 0.94f;
 	public static boolean isOdd(int i) {
 		return (i & 1) != 0;
 	}
@@ -25,10 +28,15 @@ public class StaticUtils {
 		return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ));
 	}
 
-	public static boolean isNextTo(EntityPlayer player, BlockPos pos) {
-		return Math.abs(player.motionY) < .1 && player.getDistanceSqToCenter(pos) <= 0.94;
+	public static boolean isNextToAndNoYMotion(EntityPlayer player, BlockPos pos) {
+		return Math.abs(player.motionY) < .1 && player.getDistanceSqToCenter(pos) <= CLOSE;
+	}
+	
+	public static boolean isNextToAndNoYMotion(EntityPlayer player, BlockPos pos,float distance) {
+		return Math.abs(player.motionY) < .1 && player.getDistanceSqToCenter(pos) <= distance;
 	}
 
+	
 	private static void spawnParticle(EntityPlayer player, EnumParticleTypes type, double x, double y, double z) {
 			// http://www.minecraftforge.net/forum/index.php?topic=9744.0
 			for (int countparticles = 0; countparticles <= 10; ++countparticles) {

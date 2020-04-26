@@ -217,7 +217,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		boolean ret = false;
 		IBlockState hit = world.getBlockState(pos);
 		// player has hit block, is next to this block, the block does not have anything on top of it, and has a space to slide into
-		if (hit.getBlock().equals(this) && StaticUtils.isNextTo(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
+		if (hit.getBlock().equals(this) && StaticUtils.isNextToAndNoYMotion(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
 				&& world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) {
 			if (!world.isRemote) {
 				// world.destroyBlock(pos, false);

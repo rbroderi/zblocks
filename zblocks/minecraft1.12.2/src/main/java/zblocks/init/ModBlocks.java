@@ -18,10 +18,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import zblocks.Reference;
+import zblocks.Blocks.ActivatePuzzleBlock;
 import zblocks.Blocks.DepressPuzzleBlock;
 import zblocks.Blocks.Hourglass;
 import zblocks.Blocks.PushPuzzleBlock;
 import zblocks.Blocks.StartPuzzleBlock;
+import zblocks.Blocks.TransientPuzzleBlock;
 import zblocks.Blocks.Interfaces.Colored.ColorEnum;
 import zblocks.TileEntities.ResetDataTileEntity;
 import zblocks.Utility.JSONReader;
@@ -44,7 +46,8 @@ public class ModBlocks {
 		blockList.add(new StartPuzzleBlock("start_block",Material.ROCK,c).setHardness(100f).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 		blockList.add(new Hourglass("hourglass", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(8.0f/15f));
-		blockList.add(new Hourglass("transient_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(5.0f/15f));
+		blockList.add(new TransientPuzzleBlock("transient_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(5.0f/15f));
+		blockList.add(new ActivatePuzzleBlock("activate_block", Material.ROCK).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(5.0f/15f));
 		//blockList.add(new PushPuzzleBlock("push_block_blue", Material.ROCK,ColorEnum.BLUE).setHardness(100f).setCreativeTab(CreativeTabs.REDSTONE).setLightLevel(2.0f/15f));
 		GameRegistry.registerTileEntity(ResetDataTileEntity.class, new ResourceLocation(Reference.MODID, "resetdatatileentity"));
 	}	

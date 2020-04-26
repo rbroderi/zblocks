@@ -21,18 +21,18 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zblocks.Blocks.Interfaces.Resettable;
 
-public class Hourglass extends Block{
+public class Hourglass extends Block {
 
-	//private boolean isActivated = false;
+	// private boolean isActivated = false;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
-	
-	public Hourglass(String name,Material material) {
+
+	public Hourglass(String name, Material material) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 	}
-	
+
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -56,47 +56,49 @@ public class Hourglass extends Block{
 		}
 	}
 
-	//For rendering of block underneath
+	// For rendering of block underneath
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-	return false;
+		return false;
 	}
-	
 
-	//For correct lighting around the block
+	// For correct lighting around the block
 	@Override
 	public boolean isFullCube(IBlockState state) {
-	return false;
+		return false;
 	}
-	  @Override
-	    @SideOnly(Side.CLIENT)
-	    public BlockRenderLayer getBlockLayer()
-	    {
-	        return BlockRenderLayer.TRANSLUCENT;
-	    }
 	
 	@Override
-	//resets all resettable blocks in 100 x 100 x100 radius of this hourglass
-	public boolean onBlockActivated(World worldIn,BlockPos pos,IBlockState state,EntityPlayer playerIn,
-			EnumHand hand,EnumFacing side,float hitX,float hitY,float hitZ) {
-		if(worldIn.isRemote)
-		{
+	public boolean isFullBlock(IBlockState state) {
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	// resets all resettable blocks in 100 x 100 x100 radius of this hourglass
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+			EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if (worldIn.isRemote) {
 			return true;
-		}
-		else {
+		} else {
 			playerIn.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 50, 1));
 			ResourceLocation location = new ResourceLocation("zblock", "warp");
-			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location),SoundCategory.BLOCKS, 1f, 1f);
+			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS, 1f, 1f);
 			BlockPos northWest = pos.north(100).west(100).up(100);
 			BlockPos southEast = pos.south(100).east(100).down(100);
-		for (BlockPos bPos :BlockPos.getAllInBoxMutable(northWest,southEast)){
-			Block block = worldIn.getBlockState(bPos).getBlock();
-			if(block instanceof Resettable) {
-				bPos=bPos.toImmutable();
-				((Resettable) block).resetPosition(worldIn, bPos);
+			for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
+				Block block = worldIn.getBlockState(bPos).getBlock();
+				if (block instanceof Resettable) {
+					bPos = bPos.toImmutable();
+					((Resettable) block).resetPosition(worldIn, bPos);
+				}
 			}
-		}
-				return true;
+			return true;
 		}
 	}
 }
