@@ -52,7 +52,6 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		// TODO Auto-generated method stub
 		if (worldIn.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
 			return new AxisAlignedBB(0,0,0,0,0,0);
 		}
@@ -61,16 +60,23 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 		}
 	}
 	
+	
+	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
-			return new AxisAlignedBB(0,0,0,0,0,0);
+			return new AxisAlignedBB(0,0,0,1,1,1);
 		}
 		else {
 		return new AxisAlignedBB(0,0,0,1,1,1);
 		}
 	}
 
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+		return new AxisAlignedBB(0,0,0,1,1,1);
+	}
 
 	// For correct lighting around the block
 	@Override

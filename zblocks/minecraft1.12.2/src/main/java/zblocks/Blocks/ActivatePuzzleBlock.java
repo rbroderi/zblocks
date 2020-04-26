@@ -2,6 +2,7 @@ package zblocks.Blocks;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -39,7 +40,6 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
 	}
 
-
 	// For correct lighting around the block
 	@Override
 	public boolean isFullCube(IBlockState state) {
@@ -57,72 +57,75 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
-	
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
+		//return new AxisAlignedBB(0.188, 0, 0.125, 0.812, 0.900, 0.812);
+		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
 	}
-
-
+	
 	@Override
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		// TODO Auto-generated method stub
-		return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
+		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
 	}
 
+	/*
+	 * @Override public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) { // TODO Auto-generated method stub return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9); }
+	 */
 
 	/**
 	 * toggle activation with hits by arrow
 	 */
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		if(!worldIn.isRemote) {
-		// super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
-		System.out.println("hit!:"+entityIn.getClass());
-		if (entityIn instanceof IProjectile) {
-			boolean isNew = !ignoreList.contains(entityIn);
-			ignoreList.add(entityIn);
-			if(ignoreList.size()>1000) {
-				ignoreList.poll();
+		if (!worldIn.isRemote) {
+			if (entityIn instanceof IProjectile) {
+				boolean isNew = !ignoreList.contains(entityIn);
+				ignoreList.add(entityIn);
+				if (ignoreList.size() > 1000) {
+					ignoreList.poll();
+				}
+				if (isNew && state == this.blockState.getBaseState().withProperty(activated, false)) {
+					// ejectEntityLiving(world,player, pos);
+					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
+					setNearbyMatchesActivation(worldIn, pos, true);
+					StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+				} else if (isNew) {
+					// worldIn.removeEntity(entityIn);
+					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
+					setNearbyMatchesActivation(worldIn, pos, false);
+					StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+				}
 			}
-			if (isNew && state == this.blockState.getBaseState().withProperty(activated, false)) {
-				//ejectEntityLiving(world,player, pos);
-				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
-				setNearbyMatchesActivation(worldIn,pos,true);
-				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-			} else if(isNew){
-				//worldIn.removeEntity(entityIn);
-				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
-				setNearbyMatchesActivation(worldIn,pos,false);
-				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-			}
+			// worldIn.removeEntity(entityIn);
 		}
-		//worldIn.removeEntity(entityIn);
-	}
 	}
 
+
 	/**
-	 * When left-clicked knockback all living entities inside block and toggle activation
+	 * When left-clicked toggle activation
 	 */
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-		// super.onBlockClicked(world, pos, player);
-		if (StaticUtils.isNextToAndNoYMotion(player, pos, 1.94f)) {
-			if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
-				//ejectEntityLiving(world,player, pos);
-				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, true));
-				setNearbyMatchesActivation(world,pos,true);
-				StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-			} else {
-				world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, false));
-				setNearbyMatchesActivation(world,pos,false);
-				StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+		if (!world.isRemote) {
+			// super.onBlockClicked(world, pos, player);
+			if (StaticUtils.isNextToAndNoYMotion(player, pos, 1.94f)) {
+				if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
+					// ejectEntityLiving(world,player, pos);
+					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, true));
+					setNearbyMatchesActivation(world, pos, true);
+					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+				} else {
+					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, false));
+					setNearbyMatchesActivation(world, pos, false);
+					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 
+				}
 			}
 		}
 	}
-	
+
 	@Override
 	public int getLightValue(IBlockState state) {
 		if (state == this.blockState.getBaseState().withProperty(activated, true)) {
@@ -132,7 +135,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	}
 
 //searches 100x50x100 area
-	private void setNearbyMatchesActivation(World world,BlockPos pos, boolean value) {
+	private void setNearbyMatchesActivation(World world, BlockPos pos, boolean value) {
 		BlockPos northWest = pos.north(50).west(50).up(25);
 		BlockPos southEast = pos.south(50).east(50).down(25);
 		for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
@@ -141,7 +144,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 				bPos = bPos.toImmutable();
 				Matchable match = ((Matchable) block);
 				Activatable act = (Activatable) match;
-				world.setBlockState(bPos, block.getDefaultState().withProperty(act.getActivatedIProperty(),value));
+				world.setBlockState(bPos, block.getDefaultState().withProperty(act.getActivatedIProperty(), value));
 			}
 		}
 	}
