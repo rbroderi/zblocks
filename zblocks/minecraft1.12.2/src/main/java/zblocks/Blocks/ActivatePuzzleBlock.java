@@ -1,5 +1,10 @@
 package zblocks.Blocks;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -25,6 +30,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	private Class<TransientPuzzleBlock> matchType = TransientPuzzleBlock.class;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
+	private Queue<Entity> ignoreList = new LinkedList<Entity>();
 
 	public ActivatePuzzleBlock(String name, Material material) {
 		super(material);
@@ -55,7 +61,14 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0);
+		return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
+	}
+
+
+	@Override
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+		// TODO Auto-generated method stub
+		return new AxisAlignedBB(0.1, 0, 0.1, 0.9, 0.9, 0.9);
 	}
 
 
@@ -64,14 +77,21 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	 */
 	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		if(!worldIn.isRemote) {
 		// super.onEntityCollidedWithBlock(worldIn, pos, state, entityIn);
+		System.out.println("hit!:"+entityIn.getClass());
 		if (entityIn instanceof IProjectile) {
-			if (state == this.blockState.getBaseState().withProperty(activated, false)) {
+			boolean isNew = !ignoreList.contains(entityIn);
+			ignoreList.add(entityIn);
+			if(ignoreList.size()>1000) {
+				ignoreList.poll();
+			}
+			if (isNew && state == this.blockState.getBaseState().withProperty(activated, false)) {
 				//ejectEntityLiving(world,player, pos);
 				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, true));
 				setNearbyMatchesActivation(worldIn,pos,true);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-			} else {
+			} else if(isNew){
 				//worldIn.removeEntity(entityIn);
 				worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, false));
 				setNearbyMatchesActivation(worldIn,pos,false);
@@ -79,6 +99,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 			}
 		}
 		//worldIn.removeEntity(entityIn);
+	}
 	}
 
 	/**
