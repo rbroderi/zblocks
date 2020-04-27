@@ -141,10 +141,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		super.onBlockAdded(world, pos, state);
 		setActivated(world, pos);
 		ResetDataTileEntity tile = getTileEntity(world, pos);
-		// first time we have placed block
-		if (tile.getStartPos() == null) {
-			tile.setStartPos(pos);
-		}
+		tile.setStartPos(pos);
 
 		if (world.getBlockState(pos.down()).getBlock() == Blocks.ICE) {
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, true));
@@ -225,6 +222,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				BlockPos startPos = tile.getStartPos();
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				world.setBlockState(posMoveToHere, hit);// pushes the block
+				tile = getTileEntity(world, posMoveToHere);
 				tile.setStartPos(startPos);
 
 				EnumFacing facing = player.getHorizontalFacing();
@@ -308,13 +306,16 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	@Override
 	public void resetPosition(World world, BlockPos pos) {
 		if (!world.isRemote) {
+			// System.out.println("reseting");
 			ResetDataTileEntity tile = getTileEntity(world, pos);
 			BlockPos startPos = tile.getStartPos();
 			if (startPos != null) { // perhaps set startPos to 0,0,0 as default?
 				// System.out.println("x: " + pos.getX() + "," + "y: " + pos.getY() + "," + "z: " + pos.getZ());
 				// System.out.println("x: " + startPos.getX() + "," + "y: " + startPos.getY() + "," + "z: " + startPos.getZ());
-				world.setBlockState(pos, Blocks.AIR.getDefaultState());
-				world.setBlockState(startPos, this.getDefaultState());
+				if (pos != startPos) {
+					world.setBlockState(pos, Blocks.AIR.getDefaultState());
+					world.setBlockState(startPos, this.getDefaultState());
+				}
 			}
 		}
 	}

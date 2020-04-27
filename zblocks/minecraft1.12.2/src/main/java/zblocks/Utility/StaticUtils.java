@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class StaticUtils {
-	private final static float CLOSE = 0.94f;
+	private final static float CLOSE = 0.93f;
 	public static boolean isOdd(int i) {
 		return (i & 1) != 0;
 	}

@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zblocks.Blocks.Interfaces.Resettable;
+import zblocks.Utility.StaticUtils;
 
 public class Hourglass extends Block {
 
@@ -87,8 +88,7 @@ public class Hourglass extends Block {
 			return true;
 		} else {
 			playerIn.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 50, 1));
-			ResourceLocation location = new ResourceLocation("zblock", "warp");
-			worldIn.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvent.REGISTRY.getObject(location), SoundCategory.BLOCKS, 1f, 1f);
+			StaticUtils.playSound(worldIn, pos, "warp", SoundCategory.BLOCKS, 1f);
 			BlockPos northWest = pos.north(100).west(100).up(100);
 			BlockPos southEast = pos.south(100).east(100).down(100);
 			for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {

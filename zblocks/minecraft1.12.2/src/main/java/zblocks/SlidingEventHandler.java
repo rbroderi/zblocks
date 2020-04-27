@@ -20,7 +20,7 @@ import zblocks.Utility.StaticUtils;
 
 public class SlidingEventHandler {
 	private static int tickCount = 0;
-	private static final int DELAY = 3;
+	private static final int DELAY = 2;
 
 	@SubscribeEvent
 	public static void onServerTick(TickEvent.ServerTickEvent event) {
