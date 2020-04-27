@@ -3,7 +3,9 @@
 	"defaults": {
 		"textures": {
 			"pblock128b": "zblock:blocks/pblock128b_green",
-               "pblock_blank16": "zblock:blocks/pblock_blank16_green"
+               "pblock_blank16": "zblock:blocks/pblock_blank16_green",
+               "pblock_edge90": "zblock:blocks/pblock_edge90_green",
+               "pblock_edge": "zblock:blocks/pblock_edge_green"
 		},
 		"model": "zblock:push_block_model",
 		"uvlock": false

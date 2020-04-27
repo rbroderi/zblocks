@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -53,7 +54,7 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		if (worldIn.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
-			return new AxisAlignedBB(0,0,0,0,0,0);
+			return null;//new AxisAlignedBB(0,0,0,0,0,0);
 		}
 		else {
 		return new AxisAlignedBB(0,0,0,1,1,1);
@@ -90,7 +91,7 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 
 	@Override
 	public boolean isFullBlock(IBlockState state) {
-		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
+	 if (state == this.blockState.getBaseState().withProperty(activated, false)) {
 			return false;
 		} else {
 			return true;
@@ -113,16 +114,29 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 
-//don't render side block face if it is also a transient block in deactivated state
+//don't render side block face if transient block is in deactivated state
+	
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		if (state == this.blockState.getBaseState().withProperty(activated, false) &&
-				world.getBlockState(pos.offset(face)) == this.blockState.getBaseState().withProperty(activated, false)) {
+		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
 			return false;
 		}
 		return super.doesSideBlockRendering(state, world, pos, face);
 	}
+	
 
+    @SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
+	@Override
+    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos,EnumFacing side) {
+		 if(state == this.blockState.getBaseState().withProperty(activated, false)) {
+    		IBlockState iblockstate = world.getBlockState(pos.offset(side));
+                return state != iblockstate;
+    	}
+    	return super.shouldSideBeRendered(state, world, pos, side);
+		 
+    }
+	
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -136,7 +150,7 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 			return iDISABLED;
 		}
 	}
-
+	
 	@Override
 	public IBlockState getStateFromMeta(int i) {
 		if (i == iACTIVATED) {

@@ -4,7 +4,8 @@
         "planks_big_oak": "minecraft:blocks/planks_big_oak",
         "iron_block": "minecraft:blocks/iron_block",
         "glass_orange": "minecraft:blocks/glass_orange",
-        "glass_white": "minecraft:blocks/glass_white"
+        "glass_white": "minecraft:blocks/glass_white",
+        "particle": "minecraft:blocks/glass_white"
     },
     "display": {
         "gui": {

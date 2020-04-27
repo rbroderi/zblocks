@@ -3,7 +3,9 @@
 	"defaults": {
 		"textures": {
 			"pblock128b": "zblock:blocks/pblock128b<%= echo "$seperator$color" %>",
-               "pblock_blank16": "zblock:blocks/pblock_blank16<%= echo "$seperator$color" %>"
+               "pblock_blank16": "zblock:blocks/pblock_blank16<%= echo "$seperator$color" %>",
+               "pblock_edge90": "zblock:blocks/pblock_edge90<%= echo "$seperator$color" %>",
+               "pblock_edge": "zblock:blocks/pblock_edge<%= echo "$seperator$color" %>"
 		},
 		"model": "zblock:push_block_model",
 		"uvlock": false
