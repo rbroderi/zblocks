@@ -1,7 +1,5 @@
 package zblocks.Utility;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -40,8 +38,8 @@ public class StaticUtils {
 	private static void spawnParticle(EntityPlayer player, EnumParticleTypes type, double x, double y, double z) {
 			// http://www.minecraftforge.net/forum/index.php?topic=9744.0
 			for (int countparticles = 0; countparticles <= 10; ++countparticles) {
-				player.world.spawnParticle(type, x + (player.world.rand.nextDouble() - 0.5D) * (double) 0.8, y + player.world.rand.nextDouble() * (double) 1.5 - (double) 0.1,
-						z + (player.world.rand.nextDouble() - 0.5D) * (double) 0.8, 0.0D, 0.0D, 0.0D);
+				player.world.spawnParticle(type, x + (player.world.rand.nextDouble() - 0.5D) * 0.8, y + player.world.rand.nextDouble() * 1.5 - 0.1,
+						z + (player.world.rand.nextDouble() - 0.5D) * 0.8, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

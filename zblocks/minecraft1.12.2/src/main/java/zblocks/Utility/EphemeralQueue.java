@@ -69,6 +69,7 @@ public class EphemeralQueue<T> extends AbstractCollection<T> {
 
 	class QueueIt implements Iterator<T> {
 
+		@Override
 		public boolean hasNext() {
 			if (size() == 0) {
 				for (T t : pendingItems) {
@@ -81,12 +82,14 @@ public class EphemeralQueue<T> extends AbstractCollection<T> {
 			return size() > 0;
 		}
 
+		@Override
 		public T next() {
 			inLoop = true;
 			T node = dequeue();
 			return node;
 		}
 
+		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}

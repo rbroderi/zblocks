@@ -1,6 +1,5 @@
 package zblocks.Blocks;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,20 +38,21 @@ import zblocks.Blocks.Interfaces.Matchable;
 import zblocks.Utility.StaticUtils;
 
 public class ActivatePuzzleBlock extends Block implements Matchable {
-	
+
 	public enum ActivationEnum implements IStringSerializable {
 		DEACTIVATED(0), HIT(1), REDSTONE(3);
 
 		private final int value;
 		private final static Map<Integer, ActivationEnum> lookup;
-	    static {
-	    	Map<Integer, ActivationEnum> lookupTemp = new HashMap<Integer,ActivationEnum>();
-	        for(ActivationEnum e: ActivationEnum.values()) {
-	        	lookupTemp.put(e.getValue(), e);
-	        }
-	        
-	       lookup = Collections.unmodifiableMap(lookupTemp);
-	    }
+		static {
+			Map<Integer, ActivationEnum> lookupTemp = new HashMap<Integer, ActivationEnum>();
+			for (ActivationEnum e : ActivationEnum.values()) {
+				lookupTemp.put(e.getValue(), e);
+			}
+
+			lookup = Collections.unmodifiableMap(lookupTemp);
+		}
+
 		private ActivationEnum(int value) {
 			this.value = value;
 		}
@@ -60,18 +60,11 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 		public int getValue() {
 			return value;
 		}
+
 		public static ActivationEnum getByValue(int i) {
 			/*
-			switch(i) {
-			case 0:
-				return DEACTIVATED;
-			case 1:
-				return HIT;
-			case 2:
-				return REDSTONE;
-			default:
-				return DEACTIVATED;
-			}*/
+			 * switch(i) { case 0: return DEACTIVATED; case 1: return HIT; case 2: return REDSTONE; default: return DEACTIVATED; }
+			 */
 			return lookup.get(i);
 		}
 
@@ -82,12 +75,11 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 			return this.name().toLowerCase();
 		}
 	}
-	
-	
+
 	private Class<TransientPuzzleBlock> matchType = TransientPuzzleBlock.class;
-	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated",ActivationEnum.class);
+	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated", ActivationEnum.class);
 	private Queue<Entity> ignoreList = new LinkedList<Entity>();
-	
+
 	private static final AxisAlignedBB BASE_TOP_UPPER = new AxisAlignedBB(0.312, 0.375, 0.312, 0.688, 0.438, 0.688);
 	private static final AxisAlignedBB BASE_TOP_LOWER = new AxisAlignedBB(0.375, 0.312, 0.375, 0.625, 0.375, 0.625);
 	private static final AxisAlignedBB BASE = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.312, 0.938);
@@ -97,10 +89,10 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	private static final AxisAlignedBB EAST = new AxisAlignedBB(0.688, 0.438, 0.25, 0.75, 0.875, 0.75);
 	private static final AxisAlignedBB SOUTH = new AxisAlignedBB(0.312, 0.438, 0.688, 0.688, 0.875, 0.75);
 	private static final AxisAlignedBB NORTH = new AxisAlignedBB(0.312, 0.438, 0.25, 0.688, 0.812, 0.312);
-	
+
 	/**
-	* AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
-	*/
+	 * AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
+	 */
 	private static final List<AxisAlignedBB> COLLISION_BOXES = Lists.newArrayList(BASE_TOP_UPPER, BASE_TOP_LOWER, BASE, CRYSTAL, TOP, WEST, EAST, SOUTH, NORTH);
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
 
@@ -128,50 +120,45 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
-	
+
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-	{
-	    return BOUNDING_BOX;
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return BOUNDING_BOX;
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState)
-	{
-	    entityBox = entityBox.offset(-pos.getX(), -pos.getY(), -pos.getZ());
-	    for (AxisAlignedBB box : COLLISION_BOXES)
-	    {
-	        if (entityBox.intersects(box))
-	            collidingBoxes.add(box.offset(pos));
-	    }
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity,
+			boolean isActualState) {
+		entityBox = entityBox.offset(-pos.getX(), -pos.getY(), -pos.getZ());
+		for (AxisAlignedBB box : COLLISION_BOXES) {
+			if (entityBox.intersects(box))
+				collidingBoxes.add(box.offset(pos));
+		}
 	}
 
 	@Override
 	@Nullable
-	public RayTraceResult collisionRayTrace(IBlockState state, World world, BlockPos pos, Vec3d start, Vec3d end)
-	{
-	    double distanceSq;
-	    double distanceSqShortest = Double.POSITIVE_INFINITY;
-	    RayTraceResult resultClosest = null;
-	    RayTraceResult result;
-	    start = start.subtract(pos.getX(), pos.getY(), pos.getZ());
-	    end = end.subtract(pos.getX(), pos.getY(), pos.getZ());
-	    for (AxisAlignedBB box : COLLISION_BOXES)
-	    {
-	        result = box.calculateIntercept(start, end);
-	        if (result == null)
-	            continue;
+	public RayTraceResult collisionRayTrace(IBlockState state, World world, BlockPos pos, Vec3d start, Vec3d end) {
+		double distanceSq;
+		double distanceSqShortest = Double.POSITIVE_INFINITY;
+		RayTraceResult resultClosest = null;
+		RayTraceResult result;
+		start = start.subtract(pos.getX(), pos.getY(), pos.getZ());
+		end = end.subtract(pos.getX(), pos.getY(), pos.getZ());
+		for (AxisAlignedBB box : COLLISION_BOXES) {
+			result = box.calculateIntercept(start, end);
+			if (result == null)
+				continue;
 
-	        distanceSq = result.hitVec.squareDistanceTo(start);
-	        if (distanceSq < distanceSqShortest)
-	        {
-	            distanceSqShortest = distanceSq;
-	            resultClosest = result;
-	        }
-	    }
-	    return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.addVector(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
+			distanceSq = result.hitVec.squareDistanceTo(start);
+			if (distanceSq < distanceSqShortest) {
+				distanceSqShortest = distanceSq;
+				resultClosest = result;
+			}
+		}
+		return resultClosest == null ? null
+				: new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.addVector(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
 	}
-
 
 	/**
 	 * toggle activation with hits by arrow
@@ -254,11 +241,11 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		if (state ==this.blockState.getBaseState().withProperty(activated, ActivationEnum.HIT)) {
+		if (state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.HIT)) {
 			return ActivationEnum.HIT.getValue();
-		} else if(state ==this.blockState.getBaseState().withProperty(activated, ActivationEnum.REDSTONE)){
+		} else if (state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.REDSTONE)) {
 			return ActivationEnum.REDSTONE.getValue();
-		}else {
+		} else {
 			return ActivationEnum.DEACTIVATED.getValue();
 		}
 	}
@@ -267,50 +254,40 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public IBlockState getStateFromMeta(int i) {
 		return this.blockState.getBaseState().withProperty(activated, ActivationEnum.getByValue(i));
 	}
-	
-	
-	
+
 	@Override
 	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
 		return true;
 	}
 
-	@Override    
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        if (!worldIn.isRemote)
-        {
-        	Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.HIT) || 
-        			state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
-            if (isAct && !worldIn.isBlockPowered(pos))
-            {
-                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		if (!worldIn.isRemote) {
+			Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.HIT) ||
+					state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
+			if (isAct && !worldIn.isBlockPowered(pos)) {
+				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
 				setNearbyMatchesActivation(worldIn, pos, false);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-            }
-            else if (!isAct && worldIn.isBlockPowered(pos))
-            {
+			} else if (!isAct && worldIn.isBlockPowered(pos)) {
 				setNearbyMatchesActivation(worldIn, pos, true);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
-            }
-        }
-    }
-	
+				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
+			}
+		}
+	}
+
 	@Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (!worldIn.isRemote)
-        {
-        	Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
-            if (isAct && !worldIn.isBlockPowered(pos))
-            {
-                worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		if (!worldIn.isRemote) {
+			Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
+			if (isAct && !worldIn.isBlockPowered(pos)) {
+				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
 				setNearbyMatchesActivation(worldIn, pos, false);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-            }
-        }
-    }
+			}
+		}
+	}
 
 	@Override
 	public boolean matches(Matchable other) {
