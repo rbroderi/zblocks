@@ -1,11 +1,17 @@
 package zblocks.Blocks;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
+
+import javax.annotation.Nullable;
+
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,6 +28,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -79,6 +87,22 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	private Class<TransientPuzzleBlock> matchType = TransientPuzzleBlock.class;
 	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated",ActivationEnum.class);
 	private Queue<Entity> ignoreList = new LinkedList<Entity>();
+	
+	private static final AxisAlignedBB BASE_TOP_UPPER = new AxisAlignedBB(0.312, 0.375, 0.312, 0.688, 0.438, 0.688);
+	private static final AxisAlignedBB BASE_TOP_LOWER = new AxisAlignedBB(0.375, 0.312, 0.375, 0.625, 0.375, 0.625);
+	private static final AxisAlignedBB BASE = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.312, 0.938);
+	private static final AxisAlignedBB CRYSTAL = new AxisAlignedBB(0.312, 0.438, 0.312, 0.688, 0.812, 0.688);
+	private static final AxisAlignedBB TOP = new AxisAlignedBB(0.312, 0.812, 0.25, 0.688, 0.875, 0.688);
+	private static final AxisAlignedBB WEST = new AxisAlignedBB(0.25, 0.438, 0.25, 0.312, 0.875, 0.75);
+	private static final AxisAlignedBB EAST = new AxisAlignedBB(0.688, 0.438, 0.25, 0.75, 0.875, 0.75);
+	private static final AxisAlignedBB SOUTH = new AxisAlignedBB(0.312, 0.438, 0.688, 0.688, 0.875, 0.75);
+	private static final AxisAlignedBB NORTH = new AxisAlignedBB(0.312, 0.438, 0.25, 0.688, 0.812, 0.312);
+	
+	/**
+	* AxisAlignedBBs and methods getBoundingBox, collisionRayTrace, and collisionRayTrace generated using MrCrayfish's Model Creator <a href="https://mrcrayfish.com/tools?id=mc">https://mrcrayfish.com/tools?id=mc</a>
+	*/
+	private static final List<AxisAlignedBB> COLLISION_BOXES = Lists.newArrayList(BASE_TOP_UPPER, BASE_TOP_LOWER, BASE, CRYSTAL, TOP, WEST, EAST, SOUTH, NORTH);
+	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.062, 0, 0.062, 0.938, 0.875, 0.938);
 
 	public ActivatePuzzleBlock(String name, Material material) {
 		super(material);
@@ -104,17 +128,62 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
+	
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+	    return BOUNDING_BOX;
+	}
 
+	@Override
+	public void addCollisionBoxToList(IBlockState state, World world, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entity, boolean isActualState)
+	{
+	    entityBox = entityBox.offset(-pos.getX(), -pos.getY(), -pos.getZ());
+	    for (AxisAlignedBB box : COLLISION_BOXES)
+	    {
+	        if (entityBox.intersects(box))
+	            collidingBoxes.add(box.offset(pos));
+	    }
+	}
+
+	@Override
+	@Nullable
+	public RayTraceResult collisionRayTrace(IBlockState state, World world, BlockPos pos, Vec3d start, Vec3d end)
+	{
+	    double distanceSq;
+	    double distanceSqShortest = Double.POSITIVE_INFINITY;
+	    RayTraceResult resultClosest = null;
+	    RayTraceResult result;
+	    start = start.subtract(pos.getX(), pos.getY(), pos.getZ());
+	    end = end.subtract(pos.getX(), pos.getY(), pos.getZ());
+	    for (AxisAlignedBB box : COLLISION_BOXES)
+	    {
+	        result = box.calculateIntercept(start, end);
+	        if (result == null)
+	            continue;
+
+	        distanceSq = result.hitVec.squareDistanceTo(start);
+	        if (distanceSq < distanceSqShortest)
+	        {
+	            distanceSqShortest = distanceSq;
+	            resultClosest = result;
+	        }
+	    }
+	    return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.addVector(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
+	}
+
+	/*
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		// return new AxisAlignedBB(0.188, 0, 0.125, 0.812, 0.900, 0.812);
 		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
-	}
+	}*/
 
+	/*
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
-	}
+	}*/
 
 	/**
 	 * toggle activation with hits by arrow
