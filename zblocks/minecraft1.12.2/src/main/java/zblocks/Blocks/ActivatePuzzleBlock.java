@@ -2,7 +2,6 @@ package zblocks.Blocks;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -10,6 +9,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
@@ -78,7 +78,9 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	private Class<TransientPuzzleBlock> matchType = TransientPuzzleBlock.class;
 	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated", ActivationEnum.class);
-	private Queue<Entity> ignoreList = new LinkedList<Entity>();
+	// private Queue<Entity> ignoreList = new LinkedList<Entity>();
+	private static final int IGNORE_LIST_LIMIT = 1000;
+	Queue<Entity> ignoreList = EvictingQueue.create(IGNORE_LIST_LIMIT);
 
 	private static final AxisAlignedBB BASE_TOP_UPPER = new AxisAlignedBB(0.312, 0.375, 0.312, 0.688, 0.438, 0.688);
 	private static final AxisAlignedBB BASE_TOP_LOWER = new AxisAlignedBB(0.375, 0.312, 0.375, 0.625, 0.375, 0.625);
@@ -169,9 +171,6 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 			if (entityIn instanceof IProjectile) {
 				boolean isNew = !ignoreList.contains(entityIn);
 				ignoreList.add(entityIn);
-				if (ignoreList.size() > 1000) {
-					ignoreList.poll();
-				}
 				if (isNew && state == this.blockState.getBaseState().withProperty(activated, ActivationEnum.DEACTIVATED)) {
 					// ejectEntityLiving(world,player, pos);
 					worldIn.setBlockState(pos, state.getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
