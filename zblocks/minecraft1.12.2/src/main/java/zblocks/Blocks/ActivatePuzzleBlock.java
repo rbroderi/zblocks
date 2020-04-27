@@ -172,18 +172,6 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	    return resultClosest == null ? null : new RayTraceResult(RayTraceResult.Type.BLOCK, resultClosest.hitVec.addVector(pos.getX(), pos.getY(), pos.getZ()), resultClosest.sideHit, pos);
 	}
 
-	/*
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		// return new AxisAlignedBB(0.188, 0, 0.125, 0.812, 0.900, 0.812);
-		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
-	}*/
-
-	/*
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return new AxisAlignedBB(0.2, 0, 0.2, 0.78, 0.900, 0.78);
-	}*/
 
 	/**
 	 * toggle activation with hits by arrow
