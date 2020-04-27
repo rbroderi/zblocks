@@ -88,7 +88,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			return iACTIVATED + iFROZEN; // 3
 		} else if (state == this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, true)) {
 			return iFROZEN; // 2
-		} else if (state == this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, true)) {
+		} else if (state == this.blockState.getBaseState().withProperty(activated, true).withProperty(frozen, false)) {
 			return iACTIVATED; // 1
 		} else {
 			return iDISABLED; // 0
