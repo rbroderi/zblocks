@@ -1,11 +1,14 @@
 package zblocks.Utility;
 
-import java.util.*;
+import java.util.AbstractCollection;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class EphemeralQueue<T> extends AbstractCollection<T> {
 
-	private ArrayList<T> items = new ArrayList<T>();
-	private ArrayList<T> pendingItems = new ArrayList<T>();
+	private LinkedList<T> items = new LinkedList<T>();
+	private LinkedList<T> pendingItems = new LinkedList<T>();
 	private boolean inLoop = false;
 
 	public T dequeue() {
