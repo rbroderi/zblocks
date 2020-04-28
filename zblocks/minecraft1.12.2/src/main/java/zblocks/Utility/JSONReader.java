@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import zblocks.libs.org.json.simple.JSONObject;
+import zblocks.libs.org.json.simple.parser.JSONParser;
+import zblocks.libs.org.json.simple.parser.ParseException;
 
 public class JSONReader {
 	private ArrayList<String> sounds = new ArrayList<String>();
