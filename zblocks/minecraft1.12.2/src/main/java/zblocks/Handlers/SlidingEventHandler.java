@@ -1,4 +1,4 @@
-package zblocks;
+package zblocks.Handlers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import zblocks.SlidingEventData;
 import zblocks.Blocks.PushPuzzleBlock;
 import zblocks.Utility.StaticUtils;
 

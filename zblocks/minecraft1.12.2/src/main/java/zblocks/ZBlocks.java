@@ -7,28 +7,33 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import zblocks.Handlers.GuiHandler;
+import zblocks.Handlers.SlidingEventHandler;
 import zblocks.init.ModBlocks;
 
-@Mod(modid=Reference.MODID, name=Reference.MODNAME, version=Reference.VERSION, acceptedMinecraftVersions=Reference.ACCEPTED_MINECRAFT_VERSIONS)
+@Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_MINECRAFT_VERSIONS)
 public class ZBlocks {
 	@Instance
 	public static ZBlocks instance;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		ModBlocks.init();
-		//event.getModLog();
-		//LogManager.getLogger();
-		//System.out.println(Reference.MODID + ":preInit");
+		// event.getModLog();
+		// LogManager.getLogger();
+		// System.out.println(Reference.MODID + ":preInit");
 	}
-	
+
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		//System.out.println(Reference.MODID + ":init");
+		// System.out.println(Reference.MODID + ":init");
 		MinecraftForge.EVENT_BUS.register(SlidingEventHandler.class);
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
-	
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		//System.out.println(Reference.MODID + ":postInit");
+		// System.out.println(Reference.MODID + ":postInit");
 	}
 }
