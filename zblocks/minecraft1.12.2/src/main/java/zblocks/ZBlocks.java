@@ -12,6 +12,7 @@ import zblocks.Handlers.GuiHandler;
 import zblocks.Handlers.SlidingEventHandler;
 import zblocks.init.ModBlocks;
 
+//
 @Mod(modid = Reference.MODID, name = Reference.MODNAME, version = Reference.VERSION, acceptedMinecraftVersions = Reference.ACCEPTED_MINECRAFT_VERSIONS)
 public class ZBlocks {
 	@Instance
