@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 import zblocks.Blocks.Interfaces.Colored;
 import zblocks.Blocks.Interfaces.Matchable;
 
-public class DepressPuzzleBlock extends Block implements Colored,Matchable{
-	//private boolean isActivated = false;
+public class DepressPuzzleBlock extends Block implements Colored, Matchable {
+	// private boolean isActivated = false;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
 	private ColorEnum color;
@@ -28,7 +28,7 @@ public class DepressPuzzleBlock extends Block implements Colored,Matchable{
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
 		this.color = color;
 	}
-	
+
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -60,7 +60,7 @@ public class DepressPuzzleBlock extends Block implements Colored,Matchable{
 	@SuppressWarnings("deprecation")
 	@Override
 	public int getWeakPower(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		if (state==this.getDefaultState().withProperty(activated, true)) {
+		if (state == this.getDefaultState().withProperty(activated, true)) {
 			return 15;
 		}
 		return super.getWeakPower(state, blockAccess, pos, side);
@@ -76,11 +76,11 @@ public class DepressPuzzleBlock extends Block implements Colored,Matchable{
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos neighbor) {
 		super.neighborChanged(state, world, pos, block, neighbor);
 
-		if(pos.up() == neighbor  && block instanceof Matchable) {
-			if(this.matches((Matchable) block)) {
+		if (pos.up() == neighbor && block instanceof Matchable) {
+			if (this.matches((Matchable) block)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-			}
-			else {
+				System.out.println("activated");
+			} else {
 				if (state.equals(this.getDefaultState().withProperty(activated, true))) {
 					world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 					for (EnumFacing enumfacing : EnumFacing.VALUES) {
@@ -90,22 +90,22 @@ public class DepressPuzzleBlock extends Block implements Colored,Matchable{
 			}
 		}
 	}
-	
-	//For correct lighting around the block
+
+	// For correct lighting around the block
 	@Override
 	public boolean isFullCube(IBlockState state) {
-	return false;
+		return false;
 	}
-	
+
 	@Override
 	public boolean matches(Matchable other) {
-		if(!this.getClass().equals(other.getMatchType())) {
+		if (!this.getClass().equals(other.getMatchType())) {
 			return false;
 		}
 		if (!(other.getTrait() instanceof ColorEnum)) {
 			return false;
 		}
-		return ((ColorEnum)this.getTrait()).compare(((ColorEnum)other.getTrait()));
+		return ((ColorEnum) this.getTrait()).compare(((ColorEnum) other.getTrait()));
 	}
 
 	@Override

@@ -252,17 +252,16 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	private void setActivated(World world, EntityPlayer player, BlockPos pos) {
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
 
-		if (downBlock instanceof Matchable) {
-			if (this.matches((Matchable) downBlock)) {
-				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
-				world.notifyNeighborsOfStateChange(pos.down(), this, true);
-			} else {
-				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
-				world.notifyNeighborsOfStateChange(pos.down(), this, true);
-			}
+		if (downBlock instanceof Matchable && this.matches((Matchable) downBlock)) {
+			System.out.println("activating");
+			world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
+			StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+			world.notifyNeighborsOfStateChange(pos.down(), this, true);
+		} else {
+			System.out.println("deactivating");
+			world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
+			world.notifyNeighborsOfStateChange(pos.down(), this, true);
 		}
-
 	}
 
 	private void setActivated(World world, BlockPos pos) {
@@ -271,7 +270,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				// StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+				// StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos); //TODO find out how to spawn this particle without player - tried world.search
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 				StaticUtils.playSound(world, pos, "activate", SoundCategory.BLOCKS, 1f);
 			} else {
@@ -279,7 +278,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			}
 		}
-
 	}
 
 	@Override
