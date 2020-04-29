@@ -71,24 +71,24 @@ public class DepressPuzzleBlock extends Block implements Colored, Matchable {
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
+	// TODO needs cleanup
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos neighbor) {
-		super.neighborChanged(state, world, pos, block, neighbor);
-
-		if (pos.up() == neighbor && block instanceof Matchable) {
-			if (this.matches((Matchable) block)) {
+		Block up = world.getBlockState(pos.up()).getBlock();
+		if (pos.up().equals(neighbor)) {
+			if (up instanceof Matchable && this.matches((Matchable) up)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				System.out.println("activated");
 			} else {
-				if (state.equals(this.getDefaultState().withProperty(activated, true))) {
-					world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
-					for (EnumFacing enumfacing : EnumFacing.VALUES) {
-						world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
-					}
+				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
+			}
+			for (EnumFacing enumfacing : EnumFacing.VALUES) {
+				if (enumfacing == EnumFacing.UP) {
+					continue;
 				}
+				world.notifyNeighborsOfStateChange(pos.offset(enumfacing), this, true);
 			}
 		}
+
 	}
 
 	// For correct lighting around the block

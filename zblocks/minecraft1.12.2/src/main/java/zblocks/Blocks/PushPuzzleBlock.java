@@ -253,12 +253,11 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
 
 		if (downBlock instanceof Matchable && this.matches((Matchable) downBlock)) {
-			System.out.println("activating");
 			world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
 			StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
-			world.notifyNeighborsOfStateChange(pos.down(), this, true);
+
+			// world.notifyNeighborsOfStateChange(pos.down(), this, true);
 		} else {
-			System.out.println("deactivating");
 			world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 			world.notifyNeighborsOfStateChange(pos.down(), this, true);
 		}
