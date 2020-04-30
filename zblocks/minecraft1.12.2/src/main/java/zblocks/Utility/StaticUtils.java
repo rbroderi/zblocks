@@ -27,6 +27,10 @@ public class StaticUtils {
 		return Math.sqrt((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ));
 	}
 
+	public static boolean isNextTo(EntityPlayer player, BlockPos pos, float distance) {
+		return player.getDistanceSqToCenter(pos) <= distance;
+	}
+
 	public static boolean isNextToAndNoYMotion(EntityPlayer player, BlockPos pos) {
 		return Math.abs(player.motionY) < .1 && player.getDistanceSqToCenter(pos) <= CLOSE;
 	}

@@ -80,6 +80,7 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public static IProperty<ActivationEnum> activated = PropertyEnum.create("activated", ActivationEnum.class);
 	// private Queue<Entity> ignoreList = new LinkedList<Entity>();
 	private static final int IGNORE_LIST_LIMIT = 1000;
+	private static final float ACTIVATION_DISTANCE = 1.94f;
 	Queue<Entity> ignoreList = EvictingQueue.create(IGNORE_LIST_LIMIT);
 
 	private static final AxisAlignedBB BASE_TOP_UPPER = new AxisAlignedBB(0.312, 0.375, 0.312, 0.688, 0.438, 0.688);
@@ -193,14 +194,14 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
 		if (!world.isRemote) {
 			// super.onBlockClicked(world, pos, player);
-			if (StaticUtils.isNextToAndNoYMotion(player, pos, 1.94f)) {
+			if (StaticUtils.isNextTo(player, pos, ACTIVATION_DISTANCE)) {
 				if (world.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, ActivationEnum.DEACTIVATED)) {
 					// ejectEntityLiving(world,player, pos);
 					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
 					setNearbyMatchesActivation(world, pos, true);
 					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 				} else {
-					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, ActivationEnum.HIT));
+					world.setBlockState(pos, world.getBlockState(pos).getBlock().getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED));
 					setNearbyMatchesActivation(world, pos, false);
 					StaticUtils.playSound(world, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 
@@ -300,7 +301,6 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 
 	@Override
 	public Object getTrait() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
