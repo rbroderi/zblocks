@@ -1,0 +1,55 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "zblock:bomb_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:bomb_model"
+			},
+               "time": {
+                           "8": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_8" }
+                               }
+                           },
+                           "7": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_7" }
+                               }
+                           },
+                           "6": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_6" }
+                               }
+                           },
+                           "5": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_5" }
+                               }
+                           },
+                           "4": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_4" }
+                               }
+                           },
+                           "3": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_3" }
+                               }
+                           },
+                           "2": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_2" }
+                               }
+                           },
+                           "1": {
+                               "submodel": {
+                                   "saltblock":  { "model": "zblock:wick_1" }
+                               }
+                           },
+                           "0": {}
+                       }
+	}
+}

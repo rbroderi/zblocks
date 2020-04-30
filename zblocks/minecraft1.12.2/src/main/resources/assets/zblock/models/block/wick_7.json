@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "Downloads/wick",
+		"particle": "Downloads/metal"
+	},
+	"elements": [
+		{
+			"name": "wick",
+			"from": [4, 17, 8],
+			"to": [5, 24, 9],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [12, 25, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"east": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"south": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"west": {"uv": [0, 0, 1, 7], "texture": "#1"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#1"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#1"}
+			}
+		}
+	]
+}
