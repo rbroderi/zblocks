@@ -9,7 +9,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -35,7 +34,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	public static IProperty<Boolean> frozen = PropertyBool.create("frozen");
 	private static final int iACTIVATED = 1, iDISABLED = 0;
 	private static final int iFROZEN = 2;
-	private TileEntity fallingHold; // TODO allow this to track more than one block
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
 	// public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
@@ -192,7 +190,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
 		{
 			StaticUtils.playSound(world, pos, "thud_delay", SoundCategory.BLOCKS, 1f);
-			world.setTileEntity(pos, fallingHold);
 		}
 	}
 
@@ -209,13 +206,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			}
 		}
 	}
-
-	@Override
-	protected void onStartFalling(EntityFallingBlock fallingEntity) {
-		super.onStartFalling(fallingEntity);
-		fallingHold = fallingEntity.world.getTileEntity(fallingEntity.getPosition());
-	}
-
 	// ******************************** Public ****************************************************/
 
 	public boolean moveBlockTo(World world, EntityPlayer player, BlockPos pos, BlockPos posMoveToHere) {
