@@ -7,16 +7,19 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import zblocks.Blocks.Interfaces.Colored;
 import zblocks.Blocks.Interfaces.Matchable;
+import zblocks.Utility.StaticUtils;
 
 public class DepressPuzzleBlock extends Block implements Colored, Matchable {
 	// private boolean isActivated = false;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
+	private static final float ACTIVATION_SOUND_VOLUME = 2f;
 	private ColorEnum color;
 	private Class<PushPuzzleBlock> matchType = PushPuzzleBlock.class;
 
@@ -78,6 +81,7 @@ public class DepressPuzzleBlock extends Block implements Colored, Matchable {
 		if (pos.up().equals(neighbor)) {
 			if (up instanceof Matchable && this.matches((Matchable) up)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
+				StaticUtils.playSound(world, pos, "activate", SoundCategory.BLOCKS, ACTIVATION_SOUND_VOLUME);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 			}

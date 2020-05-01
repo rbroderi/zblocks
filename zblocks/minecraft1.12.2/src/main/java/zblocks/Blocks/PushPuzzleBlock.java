@@ -9,6 +9,7 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
@@ -36,8 +37,8 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static IProperty<Boolean> frozen = PropertyBool.create("frozen");
-	private static final int iACTIVATED = 1, iDISABLED = 0;
-	private static final int iFROZEN = 2;
+	public static final int iACTIVATED = 1, iDISABLED = 0;
+	public static final int iFROZEN = 2;
 	private ColorEnum color;
 	private Class<DepressPuzzleBlock> matchType = DepressPuzzleBlock.class;
 	// public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
@@ -163,7 +164,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos neighbor) {
 		super.neighborChanged(state, world, pos, block, neighbor);
 		if (pos.down() == neighbor) {
-			if (world.getBlockState(neighbor).getBlock() == Blocks.ICE) {
+			if (SlidingEventHandler.SLIDEBLOCKS.contains(world.getBlockState(neighbor).getBlock())) {
 				world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, true));
 			} else {
 				world.setBlockState(pos, world.getBlockState(pos).withProperty(frozen, false));
@@ -252,6 +253,18 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		}
 	}
 
+	/**
+	 * Get the geometry of the queried face at the given position and state. This is used to decide whether things like buttons are allowed to be placed on the face, or how glass panes connect to the face, among other things.
+	 * <p>
+	 * Common values are {@code SOLID}, which is the default, and {@code UNDEFINED}, which represents something that does not fit the other descriptions and will generally cause other things not to connect to the face.
+	 * 
+	 * @return an approximation of the form of the given face
+	 */
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
+
 	// ******************************** Public ****************************************************/
 
 	public boolean moveBlockTo(World world, EntityPlayer player, BlockPos pos, BlockPos posMoveToHere) {
@@ -271,10 +284,15 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 				EnumFacing facing = player.getHorizontalFacing();
 				if (SlidingEventHandler.isSlidingAndFrontIsClear(world, posMoveToHere, posMoveToHere.offset(facing))) {
-					currentlySlidingBlocks.enqueue(new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos));
+					currentlySlidingBlocks.enqueue(
+							new SlidingEventData(world, posMoveToHere, player.getHorizontalFacing(), hit, startPos, SlidingEventData.DEFAULT_MOMENTUM));
 				}
+				setActivated(world, player, posMoveToHere);
+				if (SlidingEventHandler.SLIDEBLOCKS.contains(world.getBlockState(posMoveToHere.down()).getBlock())) {
+					world.setBlockState(posMoveToHere, world.getBlockState(posMoveToHere).withProperty(frozen, true));
+				}
+				world.notifyBlockUpdate(posMoveToHere, hit, world.getBlockState(posMoveToHere), 3);
 			}
-			setActivated(world, player, posMoveToHere);
 			ret = true;
 		}
 		return ret;
@@ -315,7 +333,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
 				// StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos); //TODO find out how to spawn this particle without player - tried world.search
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
-				StaticUtils.playSound(world, pos, "activate", SoundCategory.BLOCKS, 1f);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
