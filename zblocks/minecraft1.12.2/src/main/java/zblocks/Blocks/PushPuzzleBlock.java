@@ -279,8 +279,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				BlockPos startPos = tile.getStartPos();
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				world.setBlockState(posMoveToHere, hit);// pushes the block
-				tile = getTileEntity(world, posMoveToHere);
-				tile.setStartPos(startPos);
 
 				EnumFacing facing = player.getHorizontalFacing();
 				if (SlidingEventHandler.isSlidingAndFrontIsClear(world, posMoveToHere, posMoveToHere.offset(facing))) {
@@ -292,6 +290,8 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 					world.setBlockState(posMoveToHere, world.getBlockState(posMoveToHere).withProperty(frozen, true));
 				}
 				world.notifyBlockUpdate(posMoveToHere, hit, world.getBlockState(posMoveToHere), 3);
+				tile = getTileEntity(world, posMoveToHere);
+				tile.setStartPos(startPos);
 			}
 			ret = true;
 		}
