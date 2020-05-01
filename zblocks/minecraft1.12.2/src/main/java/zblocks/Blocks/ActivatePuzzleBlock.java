@@ -35,9 +35,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zblocks.Blocks.Interfaces.Activatable;
 import zblocks.Blocks.Interfaces.Matchable;
+import zblocks.Blocks.Interfaces.Resettable;
 import zblocks.Utility.StaticUtils;
 
-public class ActivatePuzzleBlock extends Block implements Matchable {
+public class ActivatePuzzleBlock extends Block implements Matchable, Resettable {
 
 	public enum ActivationEnum implements IStringSerializable {
 		DEACTIVATED(0), HIT(1), REDSTONE(3);
@@ -81,6 +82,16 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	// private Queue<Entity> ignoreList = new LinkedList<Entity>();
 	private static final int IGNORE_LIST_LIMIT = 1000;
 	private static final float ACTIVATION_DISTANCE = 1.94f;
+	private static final HashMap<String, Integer> ACTIVATION_RANGE; // TODO make this selectable on a gui
+	static {
+		ACTIVATION_RANGE = new HashMap<String, Integer>();
+		ACTIVATION_RANGE.put("north", 25);
+		ACTIVATION_RANGE.put("west", 25);
+		ACTIVATION_RANGE.put("up", 12);
+		ACTIVATION_RANGE.put("south", 25);
+		ACTIVATION_RANGE.put("east", 25);
+		ACTIVATION_RANGE.put("down", 25);
+	}
 	Queue<Entity> ignoreList = EvictingQueue.create(IGNORE_LIST_LIMIT);
 
 	private static final AxisAlignedBB BASE_TOP_UPPER = new AxisAlignedBB(0.312, 0.375, 0.312, 0.688, 0.438, 0.688);
@@ -219,10 +230,10 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 		return 0;
 	}
 
-//searches 100x50x100 area
+//searches ACTIVATION_RANGE area
 	private void setNearbyMatchesActivation(World world, BlockPos pos, boolean value) {
-		BlockPos northWest = pos.north(50).west(50).up(25);
-		BlockPos southEast = pos.south(50).east(50).down(25);
+		BlockPos northWest = pos.north(ACTIVATION_RANGE.get("north")).west(ACTIVATION_RANGE.get("west")).up(ACTIVATION_RANGE.get("up"));
+		BlockPos southEast = pos.south(ACTIVATION_RANGE.get("south")).east(ACTIVATION_RANGE.get("east")).down(ACTIVATION_RANGE.get("down"));
 		for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
 			Block block = world.getBlockState(bPos).getBlock();
 			if (block instanceof Matchable && this.matches((Matchable) block) && block instanceof Activatable) {
@@ -263,13 +274,12 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!worldIn.isRemote) {
-			Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.HIT) ||
-					state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
-			if (isAct && !worldIn.isBlockPowered(pos)) {
+			Boolean isActRedstone = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
+			if (isActRedstone && !worldIn.isBlockPowered(pos)) {
 				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
 				setNearbyMatchesActivation(worldIn, pos, false);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-			} else if (!isAct && worldIn.isBlockPowered(pos)) {
+			} else if (!isActRedstone && worldIn.isBlockPowered(pos)) {
 				setNearbyMatchesActivation(worldIn, pos, true);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
@@ -302,6 +312,13 @@ public class ActivatePuzzleBlock extends Block implements Matchable {
 	@Override
 	public Object getTrait() {
 		return null;
+	}
+
+	@Override
+	public void resetPosition(World world, BlockPos pos) {
+		if (!world.isRemote) {
+			world.setBlockState(pos, world.getBlockState(pos).withProperty(activated, ActivationEnum.DEACTIVATED));
+		}
 	}
 
 }
