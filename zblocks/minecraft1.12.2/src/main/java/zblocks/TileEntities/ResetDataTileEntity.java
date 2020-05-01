@@ -11,25 +11,29 @@ public class ResetDataTileEntity extends TileEntity {
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-		//compound.setInteger("count", count);
-		if(startPos!=null) {
-		compound.merge(NBTUtil.createPosTag(startPos));
+		// compound.setInteger("count", count);
+		if (startPos != null) {
+			compound.merge(NBTUtil.createPosTag(startPos));
 		}
 		return super.writeToNBT(compound);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		startPos = NBTUtil.getPosFromTag(compound);
 		super.readFromNBT(compound);
 	}
-	
+
 	public BlockPos getStartPos() {
 		return startPos;
 	}
 
 	public void setStartPos(BlockPos pos) {
-		this.startPos=pos;
+		this.startPos = pos;
 		markDirty();
+	}
+
+	public String getStartPosAsString() {
+		return startPos.getX() + "," + startPos.getY() + "," + startPos.getZ();
 	}
 }

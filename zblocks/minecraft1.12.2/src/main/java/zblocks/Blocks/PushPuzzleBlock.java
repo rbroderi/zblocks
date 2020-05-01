@@ -1,5 +1,7 @@
 package zblocks.Blocks;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -9,12 +11,14 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
@@ -187,8 +191,14 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	public void onEndFalling(World world, BlockPos pos, IBlockState s1, IBlockState s2) {
 		super.onEndFalling(world, pos, s1, s2);
 
-		if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
-		{
+		if (!world.isRemote && world.getTileEntity(pos) instanceof ResetDataTileEntity) {
+			// TODO there must be a better way to do this?
+			String startPosString = world.getEntitiesWithinAABB(EntityFallingBlock.class, new AxisAlignedBB(pos)).get(0).getTags().toArray()[0].toString();
+			String[] startPosStringArray = startPosString.split(",");
+			((ResetDataTileEntity) world.getTileEntity(pos)).setStartPos(
+					new BlockPos(Integer.parseInt(startPosStringArray[0]),
+							Integer.parseInt(startPosStringArray[1]),
+							Integer.parseInt(startPosStringArray[2])));
 			StaticUtils.playSound(world, pos, "thud_delay", SoundCategory.BLOCKS, 1f);
 		}
 	}
@@ -197,8 +207,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
 		if (moveBlockTo(player.world, player, pos, pos.offset(player.getHorizontalFacing()))) { // .worldObj
-			if (!world.isRemote) // world.isRemote means it's the client and there is no WorldServer
-			{
+			if (!world.isRemote) {
 				// don't play scrape if block will fall
 				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).down()))) {
 					StaticUtils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f);
@@ -206,6 +215,43 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 			}
 		}
 	}
+
+	@Override
+	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+		if (!worldIn.isRemote) {
+			this.checkFallable(worldIn, pos);
+		}
+	}
+
+	// changes default checkFallable logic
+	private void checkFallable(World worldIn, BlockPos pos) {
+		if ((worldIn.isAirBlock(pos.down()) || canFallThrough(worldIn.getBlockState(pos.down()))) && pos.getY() >= 0) {
+			// int i = 32;
+
+			if (!fallInstantly && worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
+				if (!worldIn.isRemote && worldIn.getTileEntity(pos) instanceof ResetDataTileEntity) {
+					EntityFallingBlock entityfallingblock = new EntityFallingBlock(worldIn, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, worldIn.getBlockState(pos));
+					// TODO see on end falling, there must be a better way to track startPos through fall
+					entityfallingblock.addTag(((ResetDataTileEntity) worldIn.getTileEntity(pos)).getStartPosAsString());
+					this.onStartFalling(entityfallingblock);
+					worldIn.spawnEntity(entityfallingblock);
+				}
+			} else {
+				IBlockState state = worldIn.getBlockState(pos);
+				worldIn.setBlockToAir(pos);
+				BlockPos blockpos;
+
+				for (blockpos = pos.down(); (worldIn.isAirBlock(blockpos) || canFallThrough(worldIn.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down()) {
+					;
+				}
+
+				if (blockpos.getY() > 0) {
+					worldIn.setBlockState(blockpos.up(), state); // Forge: Fix loss of state information during world gen.
+				}
+			}
+		}
+	}
+
 	// ******************************** Public ****************************************************/
 
 	public boolean moveBlockTo(World world, EntityPlayer player, BlockPos pos, BlockPos posMoveToHere) {
