@@ -66,7 +66,7 @@ public class Hourglass extends Block {
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isFullBlock(IBlockState state) {
 		return false;
@@ -94,6 +94,8 @@ public class Hourglass extends Block {
 				if (block instanceof Resettable) {
 					bPos = bPos.toImmutable();
 					((Resettable) block).resetPosition(worldIn, bPos);
+					IBlockState old = worldIn.getBlockState(bPos);
+					worldIn.notifyBlockUpdate(bPos, old, worldIn.getBlockState(bPos), 3);
 				}
 			}
 			return true;

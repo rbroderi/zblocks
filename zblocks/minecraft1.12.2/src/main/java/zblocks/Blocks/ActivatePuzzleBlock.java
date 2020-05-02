@@ -235,12 +235,14 @@ public class ActivatePuzzleBlock extends Block implements Matchable, Resettable 
 		BlockPos northWest = pos.north(ACTIVATION_RANGE.get("north")).west(ACTIVATION_RANGE.get("west")).up(ACTIVATION_RANGE.get("up"));
 		BlockPos southEast = pos.south(ACTIVATION_RANGE.get("south")).east(ACTIVATION_RANGE.get("east")).down(ACTIVATION_RANGE.get("down"));
 		for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
-			Block block = world.getBlockState(bPos).getBlock();
+			IBlockState old = world.getBlockState(bPos);
+			Block block = old.getBlock();
 			if (block instanceof Matchable && this.matches((Matchable) block) && block instanceof Activatable) {
 				bPos = bPos.toImmutable();
 				Matchable match = ((Matchable) block);
 				Activatable act = (Activatable) match;
 				world.setBlockState(bPos, block.getDefaultState().withProperty(act.getActivatedIProperty(), value));
+				world.notifyBlockUpdate(bPos, old, world.getBlockState(bPos), 3);
 			}
 		}
 	}
@@ -274,28 +276,37 @@ public class ActivatePuzzleBlock extends Block implements Matchable, Resettable 
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!worldIn.isRemote) {
+			IBlockState old = worldIn.getBlockState(pos);
 			Boolean isActRedstone = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
 			if (isActRedstone && !worldIn.isBlockPowered(pos)) {
 				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
 				setNearbyMatchesActivation(worldIn, pos, false);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 			} else if (!isActRedstone && worldIn.isBlockPowered(pos)) {
+				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
 				setNearbyMatchesActivation(worldIn, pos, true);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
-				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
 			}
+			worldIn.notifyBlockUpdate(pos, old, worldIn.getBlockState(pos), 3);
 		}
 	}
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
 		if (!worldIn.isRemote) {
+			IBlockState old = worldIn.getBlockState(pos);
 			Boolean isAct = (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.REDSTONE));
 			if (isAct && !worldIn.isBlockPowered(pos)) {
 				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.DEACTIVATED), 2);
 				setNearbyMatchesActivation(worldIn, pos, false);
 				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
+			} else if (state == worldIn.getBlockState(pos).withProperty(activated, ActivationEnum.DEACTIVATED)
+					&& worldIn.isBlockPowered(pos)) {
+				worldIn.setBlockState(pos, this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE), 2);
+				setNearbyMatchesActivation(worldIn, pos, true);
+				StaticUtils.playSound(worldIn, pos, "glass_ting", SoundCategory.BLOCKS, 2f);
 			}
+			worldIn.notifyBlockUpdate(pos, old, worldIn.getBlockState(pos), 3);
 		}
 	}
 
@@ -318,6 +329,10 @@ public class ActivatePuzzleBlock extends Block implements Matchable, Resettable 
 	public void resetPosition(World world, BlockPos pos) {
 		if (!world.isRemote) {
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(activated, ActivationEnum.DEACTIVATED));
+			neighborChanged(world.getBlockState(pos), world, pos, null, pos.up());
+			if (world.getBlockState(pos) != this.getDefaultState().withProperty(activated, ActivationEnum.REDSTONE)) {
+				setNearbyMatchesActivation(world, pos, false);
+			}
 		}
 	}
 
