@@ -59,12 +59,6 @@ public class BrokenStone extends Block {
 		return false;
 	}
 
-	// For rendering of block underneath
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
