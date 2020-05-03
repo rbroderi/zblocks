@@ -23,3 +23,5 @@ tile.hourglass.name=Hourglass
 tile.transient_block.name=Transient Puzzle Block
 tile.secret_transient_block.name=Secret Transient Puzzle Block
 tile.activate_block.name=Activate Puzzle Block
+tile.broken_stone.name=Breakable Stone
+tile.broken_stone_edge.name=Breakable Stone Edge

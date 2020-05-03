@@ -44,7 +44,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	// public static CopyOnWriteArrayList<SlidingEventData> currentlySlidingBlocks = new CopyOnWriteArrayList<SlidingEventData>();
 	public static EphemeralQueue<SlidingEventData> currentlySlidingBlocks = new EphemeralQueue<SlidingEventData>();
 
-	// this needs to be stored in tileentity private BlockPos startPos;
 	public PushPuzzleBlock(String name, Material material, ColorEnum color) {
 		super(material);
 		setUnlocalizedName(color == ColorEnum.BASE ? name : name + "_" + color.getName());
@@ -52,10 +51,6 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		this.useNeighborBrightness = true; // workaround for lighting issue - culling face not working with insets
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false).withProperty(frozen, false));
 		this.color = color;
-	}
-
-	public PushPuzzleBlock() {
-
 	}
 
 	// ******************************** Public Overrides ****************************************************/

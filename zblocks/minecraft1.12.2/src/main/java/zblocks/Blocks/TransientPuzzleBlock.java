@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zblocks.Blocks.Interfaces.Activatable;
 import zblocks.Blocks.Interfaces.Matchable;
 
-public class TransientPuzzleBlock extends Block implements Matchable,Activatable {
+public class TransientPuzzleBlock extends Block implements Matchable, Activatable {
 	private Class<ActivatePuzzleBlock> matchType = ActivatePuzzleBlock.class;
 	public static IProperty<Boolean> activated = PropertyBool.create("activated");
 	public static final int iACTIVATED = 1, iDISABLED = 0;
@@ -38,7 +39,6 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 	 * 
 	 */
 
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn,
@@ -48,34 +48,28 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 		}
 		super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, isActualState);
 	}
-	
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		if (worldIn.getBlockState(pos) == this.blockState.getBaseState().withProperty(activated, false)) {
-			return null;//new AxisAlignedBB(0,0,0,0,0,0);
-		}
-		else {
-		return new AxisAlignedBB(0,0,0,1,1,1);
+			return null;// new AxisAlignedBB(0,0,0,0,0,0);
+		} else {
+			return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
 		}
 	}
-	
-	
-	
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
-			return new AxisAlignedBB(0,0,0,1,1,1);
-		}
-		else {
-		return new AxisAlignedBB(0,0,0,1,1,1);
+			return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
+		} else {
+			return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
 		}
 	}
 
-
 	@Override
 	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
-		return new AxisAlignedBB(0,0,0,1,1,1);
+		return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
 	}
 
 	// For correct lighting around the block
@@ -90,7 +84,7 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 
 	@Override
 	public boolean isFullBlock(IBlockState state) {
-	 if (state == this.blockState.getBaseState().withProperty(activated, false)) {
+		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
 			return false;
 		} else {
 			return true;
@@ -112,9 +106,14 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
+	
+	public boolean renderAsNormalBlock()
+	{
+		return false;
+	}
 
 //don't render side block face if transient block is in deactivated state
-	
+
 	@Override
 	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
 		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
@@ -122,20 +121,19 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 		}
 		return super.doesSideBlockRendering(state, world, pos, face);
 	}
-	
 
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	@SuppressWarnings("deprecation")
 	@Override
-    public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos,EnumFacing side) {
-		 if(state == this.blockState.getBaseState().withProperty(activated, false)) {
-    		IBlockState iblockstate = world.getBlockState(pos.offset(side));
-                return state != iblockstate;
-    	}
-    	return super.shouldSideBeRendered(state, world, pos, side);
-		 
-    }
-	
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+		if (state == this.blockState.getBaseState().withProperty(activated, false)) {
+			IBlockState iblockstate = world.getBlockState(pos.offset(side));
+			return state != iblockstate;
+		}
+		return super.shouldSideBeRendered(state, world, pos, side);
+
+	}
+
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, activated);
@@ -149,7 +147,7 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 			return iDISABLED;
 		}
 	}
-	
+
 	@Override
 	public IBlockState getStateFromMeta(int i) {
 		if (i == iACTIVATED) {
@@ -177,6 +175,11 @@ public class TransientPuzzleBlock extends Block implements Matchable,Activatable
 	@Override
 	public IProperty<Boolean> getActivatedIProperty() {
 		return activated;
+	}
+
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
 	}
 
 }

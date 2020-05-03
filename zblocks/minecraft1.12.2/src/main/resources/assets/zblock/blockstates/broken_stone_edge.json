@@ -1,0 +1,26 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "zblock:broken_stone_edge_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:broken_stone_edge_model"
+			},
+		"facing":{
+			"up_north":{"model": "zblock:broken_stone_edge_model"},
+			"up_south":{"model": "zblock:broken_stone_edge_model", "y": 180},
+			"up_east":{"model": "zblock:broken_stone_edge_model", "y": 90 },
+			"up_west":{"model": "zblock:broken_stone_edge_model", "y": 270},
+			"north":{"model": "zblock:broken_stone_edge_90y_model", "x":90},
+			"south":{"model": "zblock:broken_stone_edge_90y_model", "x": -90},
+			"east":{"model": "zblock:broken_stone_edge_90y_model", "x": 90,"y": 90},
+			"west":{"model": "zblock:broken_stone_edge_90y_model", "x":  90,"y": -90},
+			"down_north":{"model": "zblock:broken_stone_edge_model", "x": 180},
+			"down_south":{"model": "zblock:broken_stone_edge_model", "x": 180,"y": 180},
+			"down_east":{"model": "zblock:broken_stone_edge_model", "x": 180,"y": 90 },
+			"down_west":{"model": "zblock:broken_stone_edge_model", "x": 180,"y": 270}
+		}
+	}
+}
