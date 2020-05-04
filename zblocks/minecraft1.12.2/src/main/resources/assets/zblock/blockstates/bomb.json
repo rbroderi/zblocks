@@ -11,45 +11,49 @@
                "time": {
                            "8": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_8" }
+                                   "wick8":  { "model": "zblock:wick_8" }
                                }
                            },
                            "7": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_7" }
+                                   "wick7":  { "model": "zblock:wick_7" }
                                }
                            },
                            "6": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_6" }
+                                   "wick6":  { "model": "zblock:wick_6" }
                                }
                            },
                            "5": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_5" }
+                                   "wick5":  { "model": "zblock:wick_5" }
                                }
                            },
                            "4": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_4" }
+                                   "wick4":  { "model": "zblock:wick_4" }
                                }
                            },
                            "3": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_3" }
+                                   "wick3":  { "model": "zblock:wick_3" }
                                }
                            },
                            "2": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_2" }
+                                   "wick2":  { "model": "zblock:wick_2" }
                                }
                            },
                            "1": {
                                "submodel": {
-                                   "saltblock":  { "model": "zblock:wick_1" }
+                                   "wick1":  { "model": "zblock:wick_1" }
                                }
                            },
-                           "0": {}
+                           "0": {
+                               "submodel": {
+                                   "wick0":  { "model": "zblock:wick_0" }
+                               }
+                           }
                        }
 	}
 }

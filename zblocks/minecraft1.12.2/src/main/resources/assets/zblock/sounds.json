@@ -28,5 +28,15 @@
     "category": "block",
     "subtitle": "zblock.subtitle.glass_ting",
     "sounds": [ "zblock:glass_ting" ]
+  },
+    "fuse": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.fuse",
+    "sounds": [ "zblock:fuse" ]
+  },
+    "explosion": {
+    "category": "block",
+    "subtitle": "zblock.subtitle.explosion",
+    "sounds": [ "zblock:explosion" ]
   }
 }

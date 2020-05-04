@@ -95,7 +95,7 @@ public class Hourglass extends Block {
 				Block block = worldIn.getBlockState(bPos).getBlock();
 				if (block instanceof Resettable) {
 					bPos = bPos.toImmutable();
-					((Resettable) block).resetPosition(worldIn, bPos);
+					((Resettable) block).reset(worldIn, bPos);
 					IBlockState old = worldIn.getBlockState(bPos);
 					worldIn.notifyBlockUpdate(bPos, old, worldIn.getBlockState(bPos), 3);
 				}

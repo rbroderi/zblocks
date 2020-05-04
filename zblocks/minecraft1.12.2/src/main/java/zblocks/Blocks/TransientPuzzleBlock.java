@@ -34,11 +34,6 @@ public class TransientPuzzleBlock extends Block implements Matchable, Activatabl
 		this.setDefaultState(this.blockState.getBaseState().withProperty(activated, false));
 	}
 
-	/*
-	 * @SuppressWarnings("deprecation")
-	 * 
-	 */
-
 	@SuppressWarnings("deprecation")
 	@Override
 	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn,
@@ -106,9 +101,8 @@ public class TransientPuzzleBlock extends Block implements Matchable, Activatabl
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.TRANSLUCENT;
 	}
-	
-	public boolean renderAsNormalBlock()
-	{
+
+	public boolean renderAsNormalBlock() {
 		return false;
 	}
 

@@ -9,8 +9,8 @@
 			"model": "zblock:broken_stone_model"
 			},
 		"broken": {
-			"true": {},
-			"false": {}
+			"true": {"textures": {"face": "zblock:blocks/blank"}},
+			"false": {"textures": {"face": "zblock:blocks/stone_cracked"}}
 		}
 	}
 }

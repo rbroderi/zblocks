@@ -311,7 +311,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 		if (downBlock instanceof Matchable && this.matches((Matchable) downBlock)) {
 			world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-			StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos);
+			StaticUtils.spawnParticleClient(player, EnumParticleTypes.CRIT_MAGIC, pos);
 
 			// world.notifyNeighborsOfStateChange(pos.down(), this, true);
 		} else {
@@ -357,7 +357,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	}
 
 	@Override
-	public void resetPosition(World world, BlockPos pos) {
+	public void reset(World world, BlockPos pos) {
 		if (!world.isRemote) {
 			// System.out.println("reseting");
 			ResetDataTileEntity tile = getTileEntity(world, pos);
