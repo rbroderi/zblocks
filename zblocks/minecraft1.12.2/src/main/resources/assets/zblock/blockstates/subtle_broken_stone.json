@@ -10,7 +10,7 @@
 			},
 		"broken": {
 			"true": {"textures": {"stone_cracked_overlay": "zblock:blocks/blank","stone":"zblock:blocks/blank" }},
-			"false": {"textures": {"stone_cracked_overlay": "zblock:blocks/stone_cracked_overlay"}}
+			"false": {"textures": {"stone_cracked_overlay": "zblock:blocks/subtle_stone_cracked_overlay"}}
 		}
 	}
 }
