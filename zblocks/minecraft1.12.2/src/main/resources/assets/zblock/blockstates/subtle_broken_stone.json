@@ -1,12 +1,12 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "zblock:broken_stone_model",
+		"model": "zblock:subtle_broken_stone_model",
 		"uvlock": false
 	},
 	"variants": {
 		"inventory": {
-			"model": "zblock:broken_stone_model"
+			"model": "zblock:subtle_broken_stone_model"
 			},
 		"broken": {
 			"true": {"textures": {"stone_cracked_overlay": "zblock:blocks/blank","stone":"zblock:blocks/blank" }},

@@ -26,6 +26,7 @@ $output+= "tile.transient_block.name=Transient Puzzle Block" + "`n"
 $output+= "tile.secret_transient_block.name=Secret Transient Puzzle Block" + "`n"
 $output+= "tile.activate_block.name=Activate Puzzle Block" + "`n"
 $output+= "tile.broken_stone.name=Breakable Stone" + "`n"
+$output+= "tile.subtle_broken_stone.name=Subtle Breakable Stone" + "`n"
 $output+= "tile.broken_stone_edge.name=Breakable Stone Edge" + "`n"
 $output+= "tile.bomb.name=Bomb" + "`n"
 $output.Trim() | Out-File -Encoding ASCII $PSScriptRoot\en_us.lang
