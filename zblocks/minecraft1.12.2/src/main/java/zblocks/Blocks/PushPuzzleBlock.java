@@ -274,6 +274,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 				BlockPos startPos = tile.getStartPos();
 				world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				world.setBlockState(posMoveToHere, hit);// pushes the block
+				StaticUtils.spawnParticleServer(world, EnumParticleTypes.BLOCK_DUST, pos, 0.0001);
 
 				EnumFacing facing = player.getHorizontalFacing();
 				if (SlidingEventHandler.isSlidingAndFrontIsClear(world, posMoveToHere, posMoveToHere.offset(facing))) {
@@ -311,7 +312,8 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 
 		if (downBlock instanceof Matchable && this.matches((Matchable) downBlock)) {
 			world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-			StaticUtils.spawnParticleClient(player, EnumParticleTypes.CRIT_MAGIC, pos);
+			// StaticUtils.spawnParticleClient(player, EnumParticleTypes.CRIT_MAGIC, pos);
+			StaticUtils.spawnParticleServer(world, EnumParticleTypes.CRIT_MAGIC, pos, 00.001);
 
 			// world.notifyNeighborsOfStateChange(pos.down(), this, true);
 		} else {
@@ -326,7 +328,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		if (downBlock instanceof Matchable) {
 			if (this.matches((Matchable) downBlock)) {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, true), 3);
-				// StaticUtils.spawnParticle(player, EnumParticleTypes.CRIT_MAGIC, pos); //TODO find out how to spawn this particle without player - tried world.search
+				StaticUtils.spawnParticleServer(world, EnumParticleTypes.CRIT_MAGIC, pos, 00.001);
 				world.notifyNeighborsOfStateChange(pos.down(), this, true);
 			} else {
 				world.setBlockState(pos, this.getDefaultState().withProperty(activated, false), 3);

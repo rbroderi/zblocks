@@ -6,7 +6,7 @@
 	},
 	"variants": {
 		"inventory": {
-			"model": "zblock:bomb_model"
+			"model": "zblock:bomb_item"
 			},
                "time": {
                            "8": {
