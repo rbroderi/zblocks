@@ -30,4 +30,6 @@ $output+= "tile.subtle_broken_stone.name=Subtle Breakable Stone" + "`n"
 $output+= "tile.secret_broken_stone.name=Secret Breakable Stone" + "`n"
 $output+= "tile.broken_stone_edge.name=Breakable Stone Edge" + "`n"
 $output+= "tile.bomb.name=Bomb" + "`n"
+$output+= "tile.reset_switch_on.name=Resettable Switch Default On" + "`n"
+$output+= "tile.reset_switch_off.name=Resettable Switch Default Off" + "`n"
 $output.Trim() | Out-File -Encoding ASCII $PSScriptRoot\en_us.lang
