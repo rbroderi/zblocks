@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+    "textures": {
+	"side": "minecraft:blocks/cactus_side",
+	"top": "minecraft:blocks/cactus_top"
+	},
+		"model": "zblock:cube_all_model",
+		"uvlock": false
+	},
+	"variants": {
+		"inventory": {
+			"model": "zblock:cube_all_model"
+			},
+          "normal": [{}]
+	}
+}

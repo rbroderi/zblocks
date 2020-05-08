@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "minecraft:blocks/stone",
-		"stone": "minecraft:blocks/stone"
+		"particle": "blocks/stone",
+		"stone": "blocks/stone"
 	},
 	"elements": [
 		{
@@ -10,18 +10,18 @@
 			"from": [0, 0, 0],
 			"to": [16, 16, 16],
 			"faces": {
-				"north": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"},
-				"east": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"},
-				"south": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"},
-				"west": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"},
+				"north": {"uv": [0, 0, 16, 16], "texture": "#stone"},
+				"east": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#stone"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#stone"},
+				"west": {"uv": [0, 0, 16, 16], "rotation": 270, "texture": "#stone"},
 				"up": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"},
-				"down": {"uv": [0, 0, 16, 16], "rotation": 90, "texture": "#stone"}
+				"down": {"uv": [0, 0, 16, 16], "texture": "#stone"}
 			}
 		},
 		{
 			"name": "Element",
-			"from": [0.0725, 18.4, -3.8],
-			"to": [15.9275, 21.6, -0.8],
+			"from": [0.3225, 18.4, -3.8],
+			"to": [15.6775, 21.6, -0.8],
 			"rotation": {"angle": -45, "axis": "x", "origin": [8, 23.7, 5]},
 			"faces": {
 				"north": {"uv": [9, 0, 12, 16], "texture": "#stone"},
@@ -34,8 +34,8 @@
 		},
 		{
 			"name": "Element",
-			"from": [0.0815, 16.3, 3],
-			"to": [15.9265, 18.3, 7],
+			"from": [0.3225, 16.3, 3],
+			"to": [15.6675, 18.3, 7],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 22.7, 11]},
 			"faces": {
 				"north": {"uv": [7, 0, 10, 16], "texture": "#stone"},
@@ -48,8 +48,8 @@
 		},
 		{
 			"name": "Element",
-			"from": [0.0725, 16.3, 11],
-			"to": [15.9275, 19.3, 14],
+			"from": [0.3227, 16.3, 11],
+			"to": [15.6727, 19.3, 14],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 22.7, 6]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 3], "rotation": 180, "texture": "#stone"},
@@ -62,8 +62,8 @@
 		},
 		{
 			"name": "Element",
-			"from": [0.0645, 16.3, 8],
-			"to": [15.9265, 19.3, 11],
+			"from": [0.3225, 16.3, 8],
+			"to": [15.6845, 19.3, 11],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 22.7, 16]},
 			"faces": {
 				"north": {"uv": [0, 0, 3, 16], "texture": "#stone"},
@@ -76,8 +76,8 @@
 		},
 		{
 			"name": "Element",
-			"from": [0.0725, 15.7, 10],
-			"to": [15.9275, 17.7, 13],
+			"from": [0.3227, 15.7, 10],
+			"to": [15.6787, 17.7, 13],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 22.7, 16]},
 			"faces": {
 				"north": {"uv": [0, 0, 3, 16], "texture": "#stone"},
@@ -90,8 +90,8 @@
 		},
 		{
 			"name": "Element",
-			"from": [0.0825, 14.7, 7],
-			"to": [15.9175, 17.7, 10],
+			"from": [0.3222, 14.7, 7],
+			"to": [15.6552, 17.7, 10],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 22.7, 6]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 3], "rotation": 180, "texture": "#stone"},
