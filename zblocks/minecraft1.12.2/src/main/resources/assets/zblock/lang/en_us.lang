@@ -28,3 +28,5 @@ tile.subtle_broken_stone.name=Subtle Breakable Stone
 tile.secret_broken_stone.name=Secret Breakable Stone
 tile.broken_stone_edge.name=Breakable Stone Edge
 tile.bomb.name=Bomb
+tile.reset_switch_on.name=Resettable Switch Default On
+tile.reset_switch_off.name=Resettable Switch Default Off

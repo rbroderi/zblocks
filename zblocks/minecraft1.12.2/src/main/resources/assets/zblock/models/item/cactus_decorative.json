@@ -1,0 +1,7 @@
+{
+    "parent": "zblock:block/cube_all_model",
+    "textures": {
+	"side": "minecraft:blocks/cactus_side",
+	"top": "minecraft:blocks/cactus_top"
+	}
+}

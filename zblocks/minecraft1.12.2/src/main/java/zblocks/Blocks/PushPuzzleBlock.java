@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -202,14 +203,27 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 	// When left-clicked
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-		if (moveBlockTo(player.world, player, pos, pos.offset(player.getHorizontalFacing()))) { // .worldObj
-			if (!world.isRemote) {
+		/*
+		 * do to the way adventure mode works, this doesn't fire if (moveBlockTo(player.world, player, pos, pos.offset(player.getHorizontalFacing()))) { // .worldObj if (!world.isRemote) { // don't play scrape if block will fall if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).down()))) { StaticUtils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f); } } }
+		 */
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		// if (playerIn instanceof EntityPlayerMP && ((EntityPlayerMP) playerIn).interactionManager.getGameType().hasLimitedInteractions()
+		// && moveBlockTo(playerIn.world, playerIn, pos, pos.offset(playerIn.getHorizontalFacing()))) { // .worldObj
+		if (moveBlockTo(playerIn.world, playerIn, pos, pos.offset(playerIn.getHorizontalFacing()))) {
+			playerIn.setActiveHand(EnumHand.MAIN_HAND);
+			playerIn.swingArm(EnumHand.MAIN_HAND);
+			if (!worldIn.isRemote) {
 				// don't play scrape if block will fall
-				if (!world.isAirBlock((pos.offset(player.getHorizontalFacing()).down()))) {
-					StaticUtils.playSound(world, pos, "scrape", SoundCategory.BLOCKS, 1f);
+				if (!worldIn.isAirBlock((pos.offset(playerIn.getHorizontalFacing()).down()))) {
+					StaticUtils.playSound(worldIn, pos, "scrape", SoundCategory.BLOCKS, 1f);
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	@Override
@@ -267,7 +281,7 @@ public class PushPuzzleBlock extends BlockFalling implements Colored, Matchable,
 		IBlockState hit = world.getBlockState(pos);
 		// player has hit block, is next to this block, the block does not have anything on top of it, and has a space to slide into
 		if (hit.getBlock().equals(this) && StaticUtils.isNextToAndNoYMotion(player, pos) && world.isAirBlock(pos.offset(EnumFacing.UP))
-				&& world.isAirBlock(posMoveToHere) && world.isBlockModifiable(player, pos)) {
+				&& world.isAirBlock(posMoveToHere)) {
 			if (!world.isRemote) {
 				// world.destroyBlock(pos, false);
 				ResetDataTileEntity tile = getTileEntity(world, pos);
