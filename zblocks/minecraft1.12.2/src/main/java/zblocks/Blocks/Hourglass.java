@@ -19,6 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zblocks.ZblockConfig;
 import zblocks.Blocks.Interfaces.Resettable;
 import zblocks.Utility.StaticUtils;
 
@@ -89,8 +90,8 @@ public class Hourglass extends Block {
 		} else {
 			playerIn.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 50, 1));
 			StaticUtils.playSound(worldIn, pos, "warp", SoundCategory.BLOCKS, 1f);
-			BlockPos northWest = pos.north(100).west(100).up(100);
-			BlockPos southEast = pos.south(100).east(100).down(100);
+			BlockPos northWest = pos.north(ZblockConfig.RESET_RANGE).west(ZblockConfig.RESET_RANGE).up(ZblockConfig.RESET_RANGE / 2);
+			BlockPos southEast = pos.south(ZblockConfig.RESET_RANGE).east(ZblockConfig.RESET_RANGE).down(ZblockConfig.RESET_RANGE / 2);
 			for (BlockPos bPos : BlockPos.getAllInBoxMutable(northWest, southEast)) {
 				Block block = worldIn.getBlockState(bPos).getBlock();
 				if (block instanceof Resettable) {

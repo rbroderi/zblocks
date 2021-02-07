@@ -70,6 +70,10 @@ public class ZblockConfig {
 	@RequiresMcRestart
 	public static boolean ENABLE_CACTUS = false;
 
+	@Config.Name("Reset Range")
+	@RequiresMcRestart
+	public static int RESET_RANGE = 100;
+
 	@Mod.EventBusSubscriber(modid = Reference.MODID)
 	private static class EventHandler {
 
