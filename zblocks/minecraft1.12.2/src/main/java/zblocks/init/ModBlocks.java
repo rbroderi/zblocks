@@ -97,15 +97,15 @@ public class ModBlocks {
 		}
 
 		if (ZblockConfig.ENABLE_BREAKABLE_WALL) {
-			blockList.add(new BrokenStone("broken_stone").setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
+			blockList.add(new BrokenStone("broken_stone").setHardness(100.0F).setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 
 		if (ZblockConfig.ENABLE_BREAKABLE_WALL_SUBTLE) {
-			blockList.add(new SubtleBrokenStone("subtle_broken_stone").setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
+			blockList.add(new SubtleBrokenStone("subtle_broken_stone").setHardness(100.0F).setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 
 		if (ZblockConfig.ENABLE_BREAKABLE_WALL_SECRET) {
-			blockList.add(new SecretBrokenStone("secret_broken_stone").setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
+			blockList.add(new SecretBrokenStone("secret_broken_stone").setHardness(100.0F).setBlockUnbreakable().setResistance(6000000.0F).setCreativeTab(CreativeTabs.BUILDING_BLOCKS));
 		}
 
 		if (ZblockConfig.ENABLE_BOMB) {
