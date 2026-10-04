@@ -561,11 +561,7 @@ public final class ZBlocksPlugin extends JavaPlugin implements Listener, Command
         World world=Bukkit.getWorld(bomb.position.world());
         if(world!=null){
             var center=new Location(world,bomb.position.x()+.5,bomb.position.y()+.25,bomb.position.z()+.5);
-            world.spawnParticle(Particle.EXPLOSION_EMITTER,center,1,0,0,0,0);
-            world.spawnParticle(Particle.FLASH,center,1,0,0,0,0);
-            world.spawnParticle(Particle.LARGE_SMOKE,center,36,.65,.4,.65,.07);
-            world.spawnParticle(Particle.FLAME,center,24,.4,.25,.4,.08);
-            world.spawnParticle(Particle.BLOCK,center,40,.7,.4,.7,.12,Material.STONE.createBlockData());
+            BombEffects.explode(world,center);
         }
         sound(bomb.position,"explosion",Sound.ENTITY_GENERIC_EXPLODE,2,1);
         // Deliberately no vanilla TNT explosion: only registered breakable walls are destroyed.

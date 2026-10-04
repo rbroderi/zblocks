@@ -1,4 +1,4 @@
-# Install and build ZBlocks 3.0.23
+# Install and build ZBlocks 3.0.24
 
 Requires Purpur 26.3, Java 25, and Nexo. Tested against nexo-1.29-dev-3d4dcd610.jar and Purpur API 26.3.build.2643-experimental (server testing uses build 2641).
 
@@ -13,7 +13,7 @@ mvn install:install-file -Dfile=/path/to/nexo-1.29-dev-3d4dcd610.jar -DgroupId=c
 mvn -f purpur/pom.xml package
 ```
 
-Output: `purpur/target/zblocks-3.0.23.jar`. Maven runs the 42 JUnit tests. Java 25 must be selected for Maven.
+Output: `purpur/target/zblocks-3.0.24.jar`. Maven runs the 43 JUnit tests. Java 25 must be selected for Maven.
 
 ## Play
 
@@ -23,4 +23,4 @@ Ridged edges support six placement directions based on the clicked face, saved a
 
 ## Validation and limits
 
-42 automated tests pass, covering puzzle state/model definitions, protection, persistence, cardinal movement, six-direction edge transforms and saved orientation, removal settings, sound keys, fuse-tip geometry and transient inventory icons. The bundled ghost models also pass structural checks for twelve thin edges each. Tests do not replace in-game checks for Nexo interactions, stacking, held attacks, particles, transparency or client rendering. Those behaviors have been iterated with server feedback and should be verified on the target server.
+43 automated tests pass, covering puzzle state/model definitions, protection, persistence, cardinal movement, six-direction edge transforms and saved orientation, removal settings, sound keys, fuse-tip geometry and transient inventory icons. The bundled ghost models also pass structural checks for twelve thin edges each. Tests do not replace in-game checks for Nexo interactions, stacking, held attacks, particles, transparency or client rendering. Those behaviors have been iterated with server feedback and should be verified on the target server.
