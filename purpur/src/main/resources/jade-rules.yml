@@ -1,0 +1,1177 @@
+{
+  "schema-version": 1,
+  "default-nexo-mod-name": "Nexo",
+  "rules": [
+    {
+      "id": "zblocks-auto-activate_base-light",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "LIGHT",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_activate_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Activation Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:activate_base",
+        "icon-nexo-id": "zblocks_activate_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-activate_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_activate_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Activation Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:activate_base",
+        "icon-nexo-id": "zblocks_activate_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-activate_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:activate_off",
+          "zblocks:activate_on",
+          "zblocks:activate_powered"
+        ]
+      },
+      "display": {
+        "name": "Activation Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:activate_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-bomb_base-light",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "LIGHT",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_bomb_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Bomb",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:bomb_base",
+        "icon-nexo-id": "zblocks_bomb_0"
+      }
+    },
+    {
+      "id": "zblocks-auto-bomb_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_bomb_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Bomb",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:bomb_base",
+        "icon-nexo-id": "zblocks_bomb_0"
+      }
+    },
+    {
+      "id": "zblocks-auto-bomb_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:bomb_0",
+          "zblocks:bomb_1",
+          "zblocks:bomb_2",
+          "zblocks:bomb_3",
+          "zblocks:bomb_4",
+          "zblocks:bomb_5",
+          "zblocks:bomb_6",
+          "zblocks:bomb_7",
+          "zblocks:bomb_8"
+        ]
+      },
+      "display": {
+        "name": "Bomb",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:bomb_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-broken_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_broken_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:broken_base",
+        "icon-nexo-id": "zblocks_broken"
+      }
+    },
+    {
+      "id": "zblocks-auto-broken_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:broken"
+        ]
+      },
+      "display": {
+        "name": "Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:broken_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-broken_edge_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_broken_edge_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Broken Edge",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:broken_edge_base",
+        "icon-nexo-id": "zblocks_broken_edge"
+      }
+    },
+    {
+      "id": "zblocks-auto-broken_edge_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:broken_edge"
+        ]
+      },
+      "display": {
+        "name": "Broken Edge",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:broken_edge_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_base",
+        "icon-nexo-id": "zblocks_depress_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_base-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_base",
+        "icon-nexo-id": "zblocks_depress_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_base"
+        ]
+      },
+      "display": {
+        "name": "Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_blue-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_blue",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Blue Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_blue",
+        "icon-nexo-id": "zblocks_depress_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_blue-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_blue",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Blue Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_blue",
+        "icon-nexo-id": "zblocks_depress_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_blue-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_blue"
+        ]
+      },
+      "display": {
+        "name": "Blue Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_cyan-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_cyan",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Cyan Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_cyan",
+        "icon-nexo-id": "zblocks_depress_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_cyan-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_cyan",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Cyan Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_cyan",
+        "icon-nexo-id": "zblocks_depress_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_cyan-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_cyan"
+        ]
+      },
+      "display": {
+        "name": "Cyan Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_green-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_green",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Green Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_green",
+        "icon-nexo-id": "zblocks_depress_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_green-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_green",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Green Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_green",
+        "icon-nexo-id": "zblocks_depress_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_green-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_green"
+        ]
+      },
+      "display": {
+        "name": "Green Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_magenta-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_magenta",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Magenta Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_magenta",
+        "icon-nexo-id": "zblocks_depress_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_magenta-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_magenta",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Magenta Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_magenta",
+        "icon-nexo-id": "zblocks_depress_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_magenta-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_magenta"
+        ]
+      },
+      "display": {
+        "name": "Magenta Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_red-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_red",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Red Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_red",
+        "icon-nexo-id": "zblocks_depress_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_red-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_red",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Red Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_red",
+        "icon-nexo-id": "zblocks_depress_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_red-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_red"
+        ]
+      },
+      "display": {
+        "name": "Red Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_yellow-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_yellow",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Yellow Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_yellow",
+        "icon-nexo-id": "zblocks_depress_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_yellow-redstone_block",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "REDSTONE_BLOCK",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_depress_yellow",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Yellow Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_yellow",
+        "icon-nexo-id": "zblocks_depress_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-depress_yellow-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:depress_yellow"
+        ]
+      },
+      "display": {
+        "name": "Yellow Pressure Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:depress_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-hourglass_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_hourglass_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Hourglass",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:hourglass_base",
+        "icon-nexo-id": "zblocks_hourglass"
+      }
+    },
+    {
+      "id": "zblocks-auto-hourglass_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:hourglass"
+        ]
+      },
+      "display": {
+        "name": "Hourglass",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:hourglass_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_base",
+        "icon-nexo-id": "zblocks_push_base_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_base_off_ice",
+          "zblocks:push_base_off_normal",
+          "zblocks:push_base_on_ice",
+          "zblocks:push_base_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_blue-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_blue",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Blue Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_blue",
+        "icon-nexo-id": "zblocks_push_blue_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_blue-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_blue_off_ice",
+          "zblocks:push_blue_off_normal",
+          "zblocks:push_blue_on_ice",
+          "zblocks:push_blue_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Blue Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_cyan-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_cyan",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Cyan Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_cyan",
+        "icon-nexo-id": "zblocks_push_cyan_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_cyan-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_cyan_off_ice",
+          "zblocks:push_cyan_off_normal",
+          "zblocks:push_cyan_on_ice",
+          "zblocks:push_cyan_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Cyan Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_green-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_green",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Green Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_green",
+        "icon-nexo-id": "zblocks_push_green_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_green-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_green_off_ice",
+          "zblocks:push_green_off_normal",
+          "zblocks:push_green_on_ice",
+          "zblocks:push_green_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Green Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_magenta-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_magenta",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Magenta Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_magenta",
+        "icon-nexo-id": "zblocks_push_magenta_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_magenta-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_magenta_off_ice",
+          "zblocks:push_magenta_off_normal",
+          "zblocks:push_magenta_on_ice",
+          "zblocks:push_magenta_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Magenta Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_red-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_red",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Red Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_red",
+        "icon-nexo-id": "zblocks_push_red_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_red-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_red_off_ice",
+          "zblocks:push_red_off_normal",
+          "zblocks:push_red_on_ice",
+          "zblocks:push_red_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Red Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_yellow-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_push_yellow",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Yellow Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_yellow",
+        "icon-nexo-id": "zblocks_push_yellow_off_ice"
+      }
+    },
+    {
+      "id": "zblocks-auto-push_yellow-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:push_yellow_off_ice",
+          "zblocks:push_yellow_off_normal",
+          "zblocks:push_yellow_on_ice",
+          "zblocks:push_yellow_on_normal"
+        ]
+      },
+      "display": {
+        "name": "Yellow Push Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:push_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-secret_broken_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_secret_broken_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Secret Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:secret_broken_base",
+        "icon-nexo-id": "zblocks_secret_broken"
+      }
+    },
+    {
+      "id": "zblocks-auto-secret_broken_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:secret_broken"
+        ]
+      },
+      "display": {
+        "name": "Secret Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:secret_broken_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-secret_transient_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_secret_transient_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Secret Transient Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:secret_transient_base",
+        "icon-nexo-id": "zblocks_secret_transient_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-secret_transient_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:secret_transient_off",
+          "zblocks:secret_transient_on"
+        ]
+      },
+      "display": {
+        "name": "Secret Transient Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:secret_transient_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_base",
+        "icon-nexo-id": "zblocks_start_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_base"
+        ]
+      },
+      "display": {
+        "name": "Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_blue-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_blue",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Blue Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_blue",
+        "icon-nexo-id": "zblocks_start_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_blue-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_blue"
+        ]
+      },
+      "display": {
+        "name": "Blue Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_blue"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_cyan-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_cyan",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Cyan Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_cyan",
+        "icon-nexo-id": "zblocks_start_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_cyan-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_cyan"
+        ]
+      },
+      "display": {
+        "name": "Cyan Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_cyan"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_green-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_green",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Green Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_green",
+        "icon-nexo-id": "zblocks_start_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_green-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_green"
+        ]
+      },
+      "display": {
+        "name": "Green Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_green"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_magenta-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_magenta",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Magenta Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_magenta",
+        "icon-nexo-id": "zblocks_start_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_magenta-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_magenta"
+        ]
+      },
+      "display": {
+        "name": "Magenta Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_magenta"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_red-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_red",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Red Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_red",
+        "icon-nexo-id": "zblocks_start_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_red-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_red"
+        ]
+      },
+      "display": {
+        "name": "Red Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_red"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_yellow-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_start_yellow",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Yellow Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_yellow",
+        "icon-nexo-id": "zblocks_start_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-start_yellow-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:start_yellow"
+        ]
+      },
+      "display": {
+        "name": "Yellow Start Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:start_yellow"
+      }
+    },
+    {
+      "id": "zblocks-auto-subtle_broken_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_subtle_broken_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Subtle Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:subtle_broken_base",
+        "icon-nexo-id": "zblocks_subtle_broken"
+      }
+    },
+    {
+      "id": "zblocks-auto-subtle_broken_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:subtle_broken"
+        ]
+      },
+      "display": {
+        "name": "Subtle Broken Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:subtle_broken_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-switch_off_base-lever",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "LEVER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_switch_off_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Switch (Normally Off)",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:switch_off_base",
+        "icon-nexo-id": "zblocks_switch_off_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-switch_off_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:switch_off_off",
+          "zblocks:switch_off_on"
+        ]
+      },
+      "display": {
+        "name": "Switch (Normally Off)",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:switch_off_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-switch_on_base-lever",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "LEVER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_switch_on_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Switch (Normally On)",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:switch_on_base",
+        "icon-nexo-id": "zblocks_switch_on_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-switch_on_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:switch_on_off",
+          "zblocks:switch_on_on"
+        ]
+      },
+      "display": {
+        "name": "Switch (Normally On)",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:switch_on_base"
+      }
+    },
+    {
+      "id": "zblocks-auto-transient_base-barrier",
+      "match": {
+        "type": "chunk-position-tag",
+        "material": "BARRIER",
+        "plugin": "ZBlocks",
+        "key": "zblocks:jade_transient_base",
+        "encoding": "packed-yzx-min-height"
+      },
+      "display": {
+        "name": "Transient Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:transient_base",
+        "icon-nexo-id": "zblocks_transient_off"
+      }
+    },
+    {
+      "id": "zblocks-auto-transient_base-models",
+      "match": {
+        "type": "item-model",
+        "plugin": "ZBlocks",
+        "models": [
+          "zblocks:transient_off",
+          "zblocks:transient_on"
+        ]
+      },
+      "display": {
+        "name": "Transient Block",
+        "mod-name": "ZBlocks",
+        "registry-id": "zblocks:transient_base"
+      }
+    }
+  ]
+}

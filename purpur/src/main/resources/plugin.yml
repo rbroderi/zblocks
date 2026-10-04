@@ -1,0 +1,20 @@
+name: ZBlocks
+version: 3.0.26
+main: io.github.rbroderi.zblocks.ZBlocksPlugin
+api-version: '26.3'
+depend: [Nexo]
+softdepend: [NexoJadeBridge]
+description: Server-side pushable puzzle blocks
+authors: [rbroderi]
+commands:
+  zblocks:
+    description: Configure puzzle blocks
+    usage: /zblocks help
+    permission: zblocks.admin
+permissions:
+  zblocks.admin:
+    description: Configure and remove puzzle blocks
+    default: op
+  zblocks.use:
+    description: Push blocks and operate puzzle controls
+    default: true
