@@ -554,7 +554,7 @@ public final class ZBlocksPlugin extends JavaPlugin implements Listener, Command
     }
     private void explode(PuzzleBlock bomb){
         if(!allowed("bomb",bomb.position,bomb.position,null)){bomb.fuse=-1;dirty=true;return;}
-        for(PuzzleBlock p:blocks.within(bomb.position,3,5,5))if(p.breakable()&&!p.destroyed&&intact(p)&&allowed("bomb-break",p.position,p.position,null)){
+        for(PuzzleBlock p:blocks.within(bomb.position,3,5,5))if(p.bombBreakable()&&!p.destroyed&&intact(p)&&allowed("bomb-break",p.position,p.position,null)){
             p.destroyed=true;render(p);
         }
         bomb.fuse=-1;bomb.destroyed=true;render(bomb);dirty=true;
