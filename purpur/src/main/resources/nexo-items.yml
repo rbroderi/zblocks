@@ -1,0 +1,1590 @@
+"zblocks_activate_off":
+  "material": "PAPER"
+  "itemname": "ZBlocks activate off"
+  "Pack":
+    "model": "zblocks:block/activate_off"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_activate_on":
+  "material": "PAPER"
+  "itemname": "ZBlocks activate on"
+  "Pack":
+    "model": "zblocks:block/activate_on"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_activate_powered":
+  "material": "PAPER"
+  "itemname": "ZBlocks activate powered"
+  "Pack":
+    "model": "zblocks:block/activate_powered"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_0":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 0"
+  "Pack":
+    "model": "zblocks:block/bomb_0"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_1":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 1"
+  "Pack":
+    "model": "zblocks:block/bomb_1"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_2":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 2"
+  "Pack":
+    "model": "zblocks:block/bomb_2"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_3":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 3"
+  "Pack":
+    "model": "zblocks:block/bomb_3"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_4":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 4"
+  "Pack":
+    "model": "zblocks:block/bomb_4"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_5":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 5"
+  "Pack":
+    "model": "zblocks:block/bomb_5"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_6":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 6"
+  "Pack":
+    "model": "zblocks:block/bomb_6"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_7":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 7"
+  "Pack":
+    "model": "zblocks:block/bomb_7"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_bomb_8":
+  "material": "PAPER"
+  "itemname": "ZBlocks bomb 8"
+  "Pack":
+    "model": "zblocks:block/bomb_8"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions": []
+"zblocks_broken":
+  "material": "PAPER"
+  "itemname": "ZBlocks broken"
+  "Pack":
+    "model": "zblocks:block/broken"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_broken_edge":
+  "material": "PAPER"
+  "itemname": "ZBlocks broken edge"
+  "Pack":
+    "model": "zblocks:block/broken_edge"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_base":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress"
+  "Pack":
+    "model": "zblocks:block/depress_base"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_blue":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress blue"
+  "Pack":
+    "model": "zblocks:block/depress_blue"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_cyan":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress cyan"
+  "Pack":
+    "model": "zblocks:block/depress_cyan"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_green":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress green"
+  "Pack":
+    "model": "zblocks:block/depress_green"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_magenta":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress magenta"
+  "Pack":
+    "model": "zblocks:block/depress_magenta"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_red":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress red"
+  "Pack":
+    "model": "zblocks:block/depress_red"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_depress_yellow":
+  "material": "PAPER"
+  "itemname": "ZBlocks depress yellow"
+  "Pack":
+    "model": "zblocks:block/depress_yellow"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_hourglass":
+  "material": "PAPER"
+  "itemname": "ZBlocks hourglass"
+  "Pack":
+    "model": "zblocks:block/hourglass"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_base_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push off ice"
+  "Pack":
+    "model": "zblocks:block/push_base_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_base_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push off normal"
+  "Pack":
+    "model": "zblocks:block/push_base_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_base_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push on ice"
+  "Pack":
+    "model": "zblocks:block/push_base_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_base_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push on normal"
+  "Pack":
+    "model": "zblocks:block/push_base_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_blue_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push blue off ice"
+  "Pack":
+    "model": "zblocks:block/push_blue_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_blue_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push blue off normal"
+  "Pack":
+    "model": "zblocks:block/push_blue_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_blue_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push blue on ice"
+  "Pack":
+    "model": "zblocks:block/push_blue_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_blue_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push blue on normal"
+  "Pack":
+    "model": "zblocks:block/push_blue_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_cyan_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push cyan off ice"
+  "Pack":
+    "model": "zblocks:block/push_cyan_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_cyan_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push cyan off normal"
+  "Pack":
+    "model": "zblocks:block/push_cyan_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_cyan_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push cyan on ice"
+  "Pack":
+    "model": "zblocks:block/push_cyan_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_cyan_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push cyan on normal"
+  "Pack":
+    "model": "zblocks:block/push_cyan_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_green_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push green off ice"
+  "Pack":
+    "model": "zblocks:block/push_green_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_green_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push green off normal"
+  "Pack":
+    "model": "zblocks:block/push_green_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_green_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push green on ice"
+  "Pack":
+    "model": "zblocks:block/push_green_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_green_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push green on normal"
+  "Pack":
+    "model": "zblocks:block/push_green_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_magenta_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push magenta off ice"
+  "Pack":
+    "model": "zblocks:block/push_magenta_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_magenta_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push magenta off normal"
+  "Pack":
+    "model": "zblocks:block/push_magenta_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_magenta_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push magenta on ice"
+  "Pack":
+    "model": "zblocks:block/push_magenta_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_magenta_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push magenta on normal"
+  "Pack":
+    "model": "zblocks:block/push_magenta_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_red_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push red off ice"
+  "Pack":
+    "model": "zblocks:block/push_red_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_red_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push red off normal"
+  "Pack":
+    "model": "zblocks:block/push_red_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_red_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push red on ice"
+  "Pack":
+    "model": "zblocks:block/push_red_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_red_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push red on normal"
+  "Pack":
+    "model": "zblocks:block/push_red_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_yellow_off_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push yellow off ice"
+  "Pack":
+    "model": "zblocks:block/push_yellow_off_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_yellow_off_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push yellow off normal"
+  "Pack":
+    "model": "zblocks:block/push_yellow_off_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_yellow_on_ice":
+  "material": "PAPER"
+  "itemname": "ZBlocks push yellow on ice"
+  "Pack":
+    "model": "zblocks:block/push_yellow_on_ice"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_push_yellow_on_normal":
+  "material": "PAPER"
+  "itemname": "ZBlocks push yellow on normal"
+  "Pack":
+    "model": "zblocks:block/push_yellow_on_normal"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_secret_broken":
+  "material": "PAPER"
+  "itemname": "ZBlocks secret broken"
+  "Pack":
+    "model": "zblocks:block/secret_broken"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_secret_transient_off":
+  "material": "PAPER"
+  "itemname": "ZBlocks secret transient off"
+  "Pack":
+    "model": "zblocks:block/secret_transient_off"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_secret_transient_on":
+  "material": "PAPER"
+  "itemname": "ZBlocks secret transient on"
+  "Pack":
+    "model": "zblocks:block/secret_transient_on"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_base":
+  "material": "PAPER"
+  "itemname": "ZBlocks start"
+  "Pack":
+    "model": "zblocks:block/start_base"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_blue":
+  "material": "PAPER"
+  "itemname": "ZBlocks start blue"
+  "Pack":
+    "model": "zblocks:block/start_blue"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_cyan":
+  "material": "PAPER"
+  "itemname": "ZBlocks start cyan"
+  "Pack":
+    "model": "zblocks:block/start_cyan"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_green":
+  "material": "PAPER"
+  "itemname": "ZBlocks start green"
+  "Pack":
+    "model": "zblocks:block/start_green"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_magenta":
+  "material": "PAPER"
+  "itemname": "ZBlocks start magenta"
+  "Pack":
+    "model": "zblocks:block/start_magenta"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_red":
+  "material": "PAPER"
+  "itemname": "ZBlocks start red"
+  "Pack":
+    "model": "zblocks:block/start_red"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_start_yellow":
+  "material": "PAPER"
+  "itemname": "ZBlocks start yellow"
+  "Pack":
+    "model": "zblocks:block/start_yellow"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_subtle_broken":
+  "material": "PAPER"
+  "itemname": "ZBlocks subtle broken"
+  "Pack":
+    "model": "zblocks:block/subtle_broken"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_switch_off_off":
+  "material": "PAPER"
+  "itemname": "ZBlocks switch off off"
+  "Pack":
+    "model": "zblocks:block/switch_off_off"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_switch_off_on":
+  "material": "PAPER"
+  "itemname": "ZBlocks switch off on"
+  "Pack":
+    "model": "zblocks:block/switch_off_on"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_switch_on_off":
+  "material": "PAPER"
+  "itemname": "ZBlocks switch on off"
+  "Pack":
+    "model": "zblocks:block/switch_on_off"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_switch_on_on":
+  "material": "PAPER"
+  "itemname": "ZBlocks switch on on"
+  "Pack":
+    "model": "zblocks:block/switch_on_on"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_transient_off":
+  "material": "PAPER"
+  "itemname": "ZBlocks transient off"
+  "Pack":
+    "model": "zblocks:block/transient_off"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_transient_on":
+  "material": "PAPER"
+  "itemname": "ZBlocks transient on"
+  "Pack":
+    "model": "zblocks:block/transient_on"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1.002,1.002,1.002"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 1,1"
+"zblocks_shape_f99200bf93bb":
+  "material": "PAPER"
+  "itemname": "Custom Block"
+  "Pack":
+    "model": "zblocks:block/nexo_empty"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1,1,1"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 0.5,0.5"
+        "ghasts":
+          - "0,0,0 0.125"
+"zblocks_shape_7dbad91744e0":
+  "material": "PAPER"
+  "itemname": "Custom Block"
+  "Pack":
+    "model": "zblocks:block/nexo_empty"
+    "generate_model": false
+  "Mechanics":
+    "furniture":
+      "properties":
+        "display_transform": "NONE"
+        "translation": "0,0.5,0"
+        "scale": "1,1,1"
+        "offset_against_blocks": false
+        "left_rotation": "0,1,0,0"
+        "right_rotation": "0,0,0,1"
+        "tracking_rotation": "FIXED"
+      "drop":
+        "loots": []
+      "restricted_rotation": "VERY_STRICT"
+      "rotatable": false
+      "hitbox":
+        "interactions":
+          - "0,0,0 0.875,0.3125"
+          - "0,0.3125,0 0.5,0.5625"
+        "ghasts":
+          - "-0.28125,0,-0.28125 0.078125"
+          - "-0.28125,0,0.03125 0.078125"
+          - "-0.28125,0,0.28125 0.078125"
+          - "0.03125,0,-0.28125 0.078125"
+          - "0.03125,0,0.03125 0.078125"
+          - "0.03125,0,0.28125 0.078125"
+          - "0.28125,0,-0.28125 0.078125"
+          - "0.28125,0,0.03125 0.078125"
+          - "0.28125,0,0.28125 0.078125"
+          - "0,0.3125,0 0.125"
+          - "0,0.375,0 0.125"

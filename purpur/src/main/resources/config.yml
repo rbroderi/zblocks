@@ -1,0 +1,42 @@
+# Display slide duration in ticks (0 disables animation, maximum 20).
+push-slide-ticks: 6
+# Horizontal half-width; vertical half-height is half this value.
+reset-range: 100
+# Activation bounds match the original implementation (not the old README).
+activation-horizontal: 25
+activation-up: 12
+activation-down: 25
+# Hard limit prevents accidentally registering an unbounded puzzle workload.
+max-blocks: 10000
+save-interval-ticks: 100
+# Nexo owns resource-pack generation and custom hitboxes.
+# Legacy hitboxes/resource-pack options in an existing config are ignored.
+
+# Named vanilla block hardness, or a number >= 0. Changes take effect after restart.
+# bedrock: admin-only; survival admins still hold attack to mine at hardness 50.
+# Other values: hold attack in survival with Nexo's tool/effect timing;
+# creative players remove instantly. zblocks.use is required for non-admin removal.
+# Color overrides (push_blue, depress_red, start_base) take priority over the type.
+removal-hardness:
+  default: obsidian
+  items:
+    push: obsidian
+    depress: obsidian
+    activate: obsidian
+    transient: obsidian
+    secret_transient: obsidian
+    hourglass: obsidian
+    start: obsidian
+    broken: obsidian
+    subtle_broken: obsidian
+    secret_broken: obsidian
+    broken_edge: obsidian
+    switch_off: obsidian
+    switch_on: obsidian
+    bomb: obsidian
+    jukebox: obsidian
+    cactus: obsidian
+    # push_blue: obsidian
+    # depress_red: stone
+
+# Controls: right-click pushes/operates; hold left-click mines (no sneak required).
